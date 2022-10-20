@@ -9,6 +9,8 @@ public class ItemPickup : MonoBehaviour
     private bool isHolding = false;
     public Camera mainCamera;
 
+    public float itemSpeed;
+
     public float castDistance;
     // Start is called before the first frame update
     void Start()
@@ -56,7 +58,7 @@ public class ItemPickup : MonoBehaviour
         {
             previousHit.GetComponent<Rigidbody>().useGravity = false;
             previousHit.GetComponent<Rigidbody>().freezeRotation = true;
-            previousHit.GetComponent<Rigidbody>().MovePosition(previousHit.transform.position + (((mainCamera.transform.position + (mainCamera.transform.forward * (castDistance - 1))) - previousHit.transform.position) * Time.deltaTime * 20));
+            previousHit.GetComponent<Rigidbody>().MovePosition(previousHit.transform.position + (((mainCamera.transform.position + (mainCamera.transform.forward * (castDistance - 1))) - previousHit.transform.position) * Time.deltaTime * itemSpeed));
             
         }
     }
