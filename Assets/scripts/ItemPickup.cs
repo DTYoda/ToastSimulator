@@ -59,6 +59,7 @@ public class ItemPickup : MonoBehaviour
             previousHit.GetComponent<Rigidbody>().useGravity = false;
             previousHit.GetComponent<Rigidbody>().freezeRotation = true;
             previousHit.GetComponent<Rigidbody>().MovePosition(previousHit.transform.position + (((mainCamera.transform.position + (mainCamera.transform.forward * (castDistance - 1))) - previousHit.transform.position) * Time.deltaTime * itemSpeed));
+            previousHit.transform.eulerAngles = new Vector3(previousHit.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, previousHit.transform.eulerAngles.z);
             
         }
     }
