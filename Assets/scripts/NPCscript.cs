@@ -20,9 +20,8 @@ public class NPCscript : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2);
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerStay(Collider collision)
     {
-        Debug.Log("detected");
         if (collision.gameObject.layer == 7 && Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log(dialog[Random.Range(0, dialog.Length)]);
