@@ -37,6 +37,10 @@ public class Movement : MonoBehaviour
     private void Update()
     {
         direction = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        if (direction.magnitude > 1)
+        {
+            direction /= direction.magnitude;
+        }
         direction *= speed;
         direction = playerBody.rotation * direction;
 

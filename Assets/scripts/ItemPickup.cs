@@ -9,7 +9,7 @@ public class ItemPickup : MonoBehaviour
     private bool isHolding = false;
     public Camera mainCamera;
 
-    public float itemSpeed;
+    public float itemSpeed = 20;
 
     public float castDistance;
     // Start is called before the first frame update
@@ -32,8 +32,6 @@ public class ItemPickup : MonoBehaviour
             isLooking = Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, castDistance, mask);
         }
 
-        Debug.Log(hit.transform.position);
-
         if (Input.GetKey(KeyCode.F))
         {
             if (isLooking)
@@ -48,34 +46,26 @@ public class ItemPickup : MonoBehaviour
         }
 
         
+
+    }
+    private void FixedUpdate()
+    {
         if (!isHolding && previousHit != null)
         {
             previousHit.GetComponent<Rigidbody>().useGravity = true;
             previousHit.GetComponent<Rigidbody>().freezeRotation = false;
-        }
-
-        Debug.Log(cameraPosition);
-        Debug.Log(previousHit.transform.position);
-        if (previousHit.transform.position != cameraPosition)
-        {
-            Debug.Log("Not equal");
-        }
-        else
-        {
-            Debug.Log("They are equal");
+            previousHit.layer = 6;
         }
         if (isHolding)
         {
             previousHit.GetComponent<Rigidbody>().useGravity = false;
+            previousHit.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             previousHit.GetComponent<Rigidbody>().freezeRotation = true;
-            previousHit.transform.position = cameraPosition;
+            previousHit.layer = 8;
+            previousHit.GetComponent<Rigidbody>().MovePosition(previousHit.transform.position + (cameraPosition - previousHit.transform.position) * Time.fixedDeltaTime * itemSpeed);
 
             previousHit.transform.eulerAngles = new Vector3(previousHit.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, previousHit.transform.eulerAngles.z);
 
         }
-    }
-    private void FixedUpdate()
-    {
-
     }
 }
