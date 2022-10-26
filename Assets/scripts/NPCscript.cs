@@ -15,7 +15,7 @@ public class NPCscript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 lookPosition = player.transform.position - transform.position;
+        Vector3 lookPosition = new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z);
         Quaternion rotation = Quaternion.LookRotation(lookPosition);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2);
     }
