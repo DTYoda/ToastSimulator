@@ -32,7 +32,7 @@ public class ItemPickup : MonoBehaviour
             isLooking = Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, castDistance, mask);
         }
 
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             if (isLooking)
             {
