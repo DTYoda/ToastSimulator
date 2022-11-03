@@ -83,6 +83,8 @@ public class NPCscript : MonoBehaviour
         if (other.gameObject.layer == 7)
         {
             interactText.gameObject.SetActive(false);
+            interactText.text = "";
+            isSpeaking = false;
             isInside = false;
         }
 
