@@ -14,6 +14,8 @@ public class QuestManager : MonoBehaviour
 
     public bool hasQuest = false;
 
+    public int acceptedQuest = 0;
+
     private void Update()
     {
         if (hasQuest)
@@ -24,5 +26,14 @@ public class QuestManager : MonoBehaviour
         {
             questText.text = "";
         }    
+    }
+
+    public void Accept()
+    {
+        acceptedQuest = 1;
+    }
+    public void Decline()
+    {
+        acceptedQuest = -1;
     }
 }

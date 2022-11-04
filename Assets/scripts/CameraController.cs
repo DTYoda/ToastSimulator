@@ -25,20 +25,6 @@ public class CameraController : MonoBehaviour
 		rotX += Input.GetAxis("Mouse Y") * sensitivity;
 
 		rotX = Mathf.Clamp(rotX, minX, maxX);
-	
-
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			//Mistake happened here vvvv
-			Cursor.lockState = CursorLockMode.None;
-			Cursor.visible = true;
-		}
-
-		if (Cursor.visible && Input.GetMouseButtonDown(1))
-		{
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
-		}
 	}
     private void FixedUpdate()
     {

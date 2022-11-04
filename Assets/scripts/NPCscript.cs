@@ -23,6 +23,8 @@ public class NPCscript : MonoBehaviour
 
     private int speakText;
     public Text interactText;
+    public Text[] acceptedQuestTexts;
+    public GameObject questAcceptObject;
     void Start()
     {
         body = this.gameObject.GetComponent<Rigidbody>();
@@ -38,18 +40,7 @@ public class NPCscript : MonoBehaviour
 
         if (isSpeaking)
         {
-            if (hasQuest && !acceptedQuest && !completeQuest && player.GetComponent<QuestManager>().hasQuest == false)
-            {
-                player.GetComponent<QuestManager>().hasQuest = true;
-                player.GetComponent<QuestManager>().currentStep = 0;
-                player.GetComponent<QuestManager>().objectives = questObjectives;
-                player.GetComponent<QuestManager>().currentQuest = questName;
-                speakText = 0;
-            }
-            else
-            {
-                interactText.text = dialog[speakText];
-            }
+            AskForQuest();
 
         }
         if (isInside)
@@ -66,6 +57,7 @@ public class NPCscript : MonoBehaviour
             }
         }
 
+        QuestIcon();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -87,6 +79,74 @@ public class NPCscript : MonoBehaviour
             isSpeaking = false;
             isInside = false;
         }
+
+    }
+
+    private void AskForQuest()
+    {
+        if (hasQuest && !acceptedQuest && !completeQuest && player.GetComponent<QuestManager>().hasQuest == false)
+        {
+            speakText = 0;
+            interactText.text = dialog[speakText];
+            questAcceptObject.SetActive(true);
+            acceptedQuestTexts[0].text = "Accept Quest: " + questName + "?";
+            acceptedQuestTexts[1].text = "This Quest Has " + questObjectives.Length + " steps";
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0;
+            if (player.GetComponent<QuestManager>().acceptedQuest == 1)
+            {
+                player.GetComponent<QuestManager>().hasQuest = true;
+                player.GetComponent<QuestManager>().currentStep = 0;
+                player.GetComponent<QuestManager>().objectives = questObjectives;
+                player.GetComponent<QuestManager>().currentQuest = questName;
+                questAcceptObject.SetActive(false);
+                player.GetComponent<QuestManager>().acceptedQuest = 0;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                Time.timeScale = 1;
+            }
+            else if (player.GetComponent<QuestManager>().acceptedQuest == -1)
+            {
+                isSpeaking = false;
+                questAcceptObject.SetActive(false);
+                player.GetComponent<QuestManager>().acceptedQuest = 0;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                Time.timeScale = 1;
+            }
+
+
+        }
+        else
+        {
+            interactText.text = dialog[speakText];
+        }
+    }
+
+    public GameObject questIcon;
+    bool i = false;
+    private void QuestIcon()
+    {
+
+        if (questIcon.transform.localPosition.y > 1.7)
+        {
+            i = true;
+        }
+        else if (questIcon.transform.localPosition.y < 1.2)
+        {
+            i = false;
+        }
+
+        if (i)
+        {
+            questIcon.transform.position -= new Vector3(0, 1 * Time.deltaTime, 0);
+        }
+        else
+        {
+            questIcon.transform.position += new Vector3(0, 1 * Time.deltaTime, 0);
+        }
+        Debug.Log(i);
 
     }
 }
