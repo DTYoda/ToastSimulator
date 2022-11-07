@@ -1651,7 +1651,6 @@ GameObject:
   - component: {fileID: 1094163969}
   - component: {fileID: 1094163972}
   - component: {fileID: 1094163971}
-  - component: {fileID: 1094163970}
   m_Layer: 0
   m_Name: QuestAlert
   m_TagString: Untagged
@@ -1673,20 +1672,6 @@ Transform:
   m_Father: {fileID: 304954683}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1094163970
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094163968}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1094163971
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1706,7 +1691,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: adb24c52e5bf3f342a15345eab1df73a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2457,7 +2442,6 @@ GameObject:
   - component: {fileID: 1613139959}
   - component: {fileID: 1613139962}
   - component: {fileID: 1613139961}
-  - component: {fileID: 1613139960}
   m_Layer: 0
   m_Name: QuestAlert
   m_TagString: Untagged
@@ -2479,20 +2463,6 @@ Transform:
   m_Father: {fileID: 2018417684}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1613139960
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613139958}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1613139961
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2512,7 +2482,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: adb24c52e5bf3f342a15345eab1df73a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

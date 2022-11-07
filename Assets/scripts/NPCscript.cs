@@ -56,8 +56,15 @@ public class NPCscript : MonoBehaviour
                 isSpeaking = true;
             }
         }
+        if (hasQuest && !acceptedQuest && !completeQuest)
+        {
+            QuestIcon();
+        }
+        else
+        {
+            questIcon.SetActive(false);
+        }
 
-        QuestIcon();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -103,6 +110,7 @@ public class NPCscript : MonoBehaviour
                 questAcceptObject.SetActive(false);
                 player.GetComponent<QuestManager>().acceptedQuest = 0;
                 Cursor.lockState = CursorLockMode.Locked;
+                acceptedQuest = true;
                 Cursor.visible = false;
                 Time.timeScale = 1;
             }
@@ -129,24 +137,23 @@ public class NPCscript : MonoBehaviour
     private void QuestIcon()
     {
 
-        if (questIcon.transform.localPosition.y > 1.7)
+        if (questIcon.transform.localPosition.y > 1.6)
         {
             i = true;
         }
-        else if (questIcon.transform.localPosition.y < 1.2)
+        else if (questIcon.transform.localPosition.y < 1.3)
         {
             i = false;
         }
 
         if (i)
         {
-            questIcon.transform.position -= new Vector3(0, 1 * Time.deltaTime, 0);
+            questIcon.transform.position -= new Vector3(0, 0.5f * Time.deltaTime, 0);
         }
         else
         {
-            questIcon.transform.position += new Vector3(0, 1 * Time.deltaTime, 0);
+            questIcon.transform.position += new Vector3(0, 0.5f * Time.deltaTime, 0);
         }
-        Debug.Log(i);
 
     }
 }
