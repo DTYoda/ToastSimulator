@@ -25,6 +25,8 @@ public class NPCscript : MonoBehaviour
     public Text interactText;
     public Text[] acceptedQuestTexts;
     public GameObject questAcceptObject;
+
+    private bool isLooking;
     void Start()
     {
         body = this.gameObject.GetComponent<Rigidbody>();

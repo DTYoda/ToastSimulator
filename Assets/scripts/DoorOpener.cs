@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class DoorOpener : MonoBehaviour
 {
-    public bool isOpen = false;
-    public float rotateSpeed;
+    private bool isOpen = false;
+    private float rotateSpeed = 150;
+
+    public Camera mainCam;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -17,9 +19,12 @@ public class DoorOpener : MonoBehaviour
         {
             transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
         }
-        else if (!isOpen && transform.eulerAngles.y > 0)
+        else if (!isOpen && !(transform.eulerAngles.y == 0))
         {
             transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0);
         }
+
+        if (transform.eulerAngles.y > 359)
+            transform.eulerAngles = new Vector3(0, 0, 0);
     }
 }

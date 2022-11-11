@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18388538, g: 0.2289057, b: 0.30237108, a: 1}
+  m_IndirectSpecularColor: {r: 0.18388541, g: 0.2289057, b: 0.30237105, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 304954680}
   m_Layer: 0
   m_Name: Grandpa
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1152,7 +1152,6 @@ GameObject:
   m_Component:
   - component: {fileID: 675342894}
   - component: {fileID: 675342893}
-  - component: {fileID: 675342895}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -1172,8 +1171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58e7d026993dc94d805c948c9bd5c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 0
-  rotateSpeed: 0
+  mainCam: {fileID: 0}
 --- !u!4 &675342894
 Transform:
   m_ObjectHideFlags: 0
@@ -1189,20 +1187,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &675342895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 675342892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b58e7d026993dc94d805c948c9bd5c28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isOpen: 0
-  rotateSpeed: 10
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2532,7 +2516,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600856890}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5fbf8def654e77e43b56e4cb2453f325, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -3261,6 +3245,8 @@ MonoBehaviour:
   maxX: 80
   sensitivity: 5
   cam: {fileID: 963194227}
+  rotY: 0
+  rotX: 0
 --- !u!4 &1976682662
 Transform:
   m_ObjectHideFlags: 0
@@ -3362,7 +3348,7 @@ GameObject:
   - component: {fileID: 2018417685}
   m_Layer: 0
   m_Name: Grandma
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
