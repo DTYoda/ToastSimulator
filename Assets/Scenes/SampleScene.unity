@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18388541, g: 0.2289057, b: 0.30237105, a: 1}
+  m_IndirectSpecularColor: {r: 0.18388538, g: 0.2289057, b: 0.30237108, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -488,7 +488,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: bfce67c88498f1945a4565e36077f2bb, type: 3}
     m_FontSize: 29
     m_FontStyle: 0
     m_BestFit: 1
@@ -3176,9 +3176,9 @@ GameObject:
   - component: {fileID: 1976682662}
   - component: {fileID: 1976682659}
   - component: {fileID: 1976682660}
-  - component: {fileID: 1976682661}
   - component: {fileID: 1976682663}
   - component: {fileID: 1976682664}
+  - component: {fileID: 1976682665}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -3229,24 +3229,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &1976682661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1976682658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d183645c3872414780f920f1a592760, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minX: -80
-  maxX: 80
-  sensitivity: 5
-  cam: {fileID: 963194227}
-  rotY: 0
-  rotX: 0
 --- !u!4 &1976682662
 Transform:
   m_ObjectHideFlags: 0
@@ -3300,6 +3282,22 @@ MonoBehaviour:
   currentStep: 0
   hasQuest: 0
   acceptedQuest: 0
+--- !u!114 &1976682665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976682658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cdb229cc48aaf74bbdc12ca4915fe9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minX: -60
+  maxX: 60
+  sensitivity: 50
+  cam: {fileID: 963194227}
 --- !u!1 &1982468378
 GameObject:
   m_ObjectHideFlags: 0
