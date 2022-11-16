@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float speed;
+    private float speed;
     public float originalSpeed;
     public float jumpSpeed;
     public float sprintSpeed;
@@ -15,11 +15,11 @@ public class Movement : MonoBehaviour
     public GameObject player;
     public Camera mainCamera;
 
-    public Vector3 direction;
+    private Vector3 direction;
 
     public GameObject groundCheck;
     public float checkRadius;
-    public bool isGrounded;
+    private bool isGrounded;
 
     public LayerMask mask;
 
