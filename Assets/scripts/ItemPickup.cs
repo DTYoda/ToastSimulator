@@ -27,6 +27,10 @@ public class ItemPickup : MonoBehaviour
     Vector3 cameraPosition;
     void Update()
     {
+        if (previousHit == null)
+        {
+            isHolding = false;
+        }
 
         cameraPosition = mainCamera.transform.position + (castDistance - 1) * mainCamera.transform.forward;
 
