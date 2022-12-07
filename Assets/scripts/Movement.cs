@@ -18,10 +18,12 @@ public class Movement : MonoBehaviour
     private Vector3 direction;
 
     public GameObject groundCheck;
-    public float checkRadius;
+    private float checkRadius = 0.01f;
     private bool isGrounded;
 
     public LayerMask mask;
+
+    public Animator charAnim;
 
     void Start()
     {
@@ -37,6 +39,16 @@ public class Movement : MonoBehaviour
     private void Update()
     {
         direction = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+
+        if (direction.magnitude > 0)
+        {
+            charAnim.SetBool("isWalking", true);
+        }
+        else
+        {
+            charAnim.SetBool("isWalking", false);
+        }
+
         if (direction.magnitude > 1)
         {
             direction /= direction.magnitude;
@@ -53,7 +65,11 @@ public class Movement : MonoBehaviour
         {
             speed = originalSpeed;
             if (Input.GetKeyDown(KeyCode.Space))
+            {
                 playerBody.AddForce(new Vector3(0, jumpHeight, 0));
+                charAnim.SetTrigger("Jump");
+            }
+
         }
 
     }
