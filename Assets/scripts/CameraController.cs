@@ -8,7 +8,8 @@ public class CameraController : MonoBehaviour
 	public float maxX = 60f;
 
 	public float sensitivity;
-	public Camera cam;
+	public Camera cam1;
+	public Camera cam2;
 
 	float rotY = 0f;
 	float rotX = 0f;
@@ -35,7 +36,8 @@ public class CameraController : MonoBehaviour
     private void FixedUpdate()
     {
 		transform.localEulerAngles = new Vector3(0, rotY, 0);
-		cam.transform.localEulerAngles = new Vector3(-rotX, 0, 0);
+		cam1.transform.localEulerAngles = new Vector3(-rotX, 0, 0);
+		cam2.transform.localEulerAngles = new Vector3(-rotX, 0, 0);
 	}
 
 }
