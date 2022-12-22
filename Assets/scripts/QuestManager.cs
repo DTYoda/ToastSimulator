@@ -9,6 +9,7 @@ public class QuestManager : MonoBehaviour
     public string currentQuest;
 
     public Text questText;
+    public GameObject questBox;
 
     public int currentStep;
 
@@ -21,10 +22,12 @@ public class QuestManager : MonoBehaviour
         if (hasQuest)
         {
             questText.text = currentQuest + ": " + objectives[currentStep];
+            questBox.SetActive(true);
         }
         else
         {
             questText.text = "";
+            questBox.SetActive(false);
         }    
     }
 
