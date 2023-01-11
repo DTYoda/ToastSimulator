@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class ItemPickup : MonoBehaviour
 {
     public LayerMask mask;
-    public Text interactText;
+    private Text interactText;
 
     private bool isLooking;
     private bool isHolding = false;
-    public Camera mainCamera;
+    private Camera mainCamera;
 
     public float itemSpeed = 20;
 
@@ -18,7 +18,8 @@ public class ItemPickup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        interactText = GameObject.Find("InteractText").GetComponent<Text>();
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
