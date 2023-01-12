@@ -63,7 +63,14 @@ public class Movement : MonoBehaviour
         }
         else 
         {
-            speed = originalSpeed;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                speed = sprintSpeed;
+            }
+            else
+            {
+                speed = originalSpeed;
+            }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 playerBody.AddForce(new Vector3(0, jumpHeight, 0));

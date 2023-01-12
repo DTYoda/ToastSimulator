@@ -302,6 +302,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5328528981995160599, guid: af900cb3ca1f30b4e872351a8e3cb575, type: 3}
+      propertyPath: sprintSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5328528981995160604, guid: af900cb3ca1f30b4e872351a8e3cb575, type: 3}
       propertyPath: questBox
       value: 
@@ -449,6 +453,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7210564053644185393, guid: 99d0617c3a9ed7647ba5597572c2416c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7210564053906161810, guid: 99d0617c3a9ed7647ba5597572c2416c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
