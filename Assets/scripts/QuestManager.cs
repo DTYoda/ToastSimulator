@@ -8,8 +8,8 @@ public class QuestManager : MonoBehaviour
     public string[] objectives;
     public string currentQuest;
 
-    private Text questText;
-    GameObject questBox;
+    public Text questText;
+    public GameObject questBox;
 
     public int currentStep;
 
@@ -18,10 +18,7 @@ public class QuestManager : MonoBehaviour
     public int acceptedQuest = 0;
 
     private void Start()
-    {
-        questText = GameObject.Find("QuestText").GetComponent<Text>();
-        questBox = GameObject.Find("QuestBox");
-    }
+    {    }
 
     private void Update()
     {
