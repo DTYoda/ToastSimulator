@@ -66,12 +66,10 @@ public class Movement : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 speed = sprintSpeed;
-                charAnim.SetBool("isSprinting", true);
             }
             else
             {
                 speed = originalSpeed;
-                charAnim.SetBool("isSprinting", false);
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {

@@ -31,8 +31,6 @@ public class NPCscript : MonoBehaviour
     {
         body = this.gameObject.GetComponent<Rigidbody>();
         interactText.gameObject.SetActive(false);
-
-        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
