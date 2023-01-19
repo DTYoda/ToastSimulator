@@ -1485,7 +1485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalSpeed: 3
   jumpSpeed: 2
-  sprintSpeed: 0
+  sprintSpeed: 6
   jumpHeight: 3000
   playerBody: {fileID: 5328528981995160592}
   player: {fileID: 5328528981995160598}
