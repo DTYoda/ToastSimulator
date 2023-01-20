@@ -72,7 +72,6 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            Debug.Log("sptint");
             isSprinting = true;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
