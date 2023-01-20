@@ -5,9 +5,10 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     private float speed;
-    public float originalSpeed;
-    public float jumpSpeed;
-    public float sprintSpeed;
+    private float originalSpeed = 3;
+    private float jumpSpeed = 2;
+    private float sprintSpeed = 6;
+    private bool isSprinting = false;
 
     public float jumpHeight;
 
@@ -24,11 +25,6 @@ public class Movement : MonoBehaviour
     public LayerMask mask;
 
     public Animator charAnim;
-
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -57,27 +53,37 @@ public class Movement : MonoBehaviour
         direction = playerBody.rotation * direction;
 
         isGrounded = Physics.CheckSphere(groundCheck.transform.position, checkRadius, mask);
-        if (!isGrounded)
+
+        if (isSprinting && isGrounded)
         {
-            speed = jumpSpeed;
+            speed = sprintSpeed;
         }
-        else 
+        else
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if(!isGrounded)
             {
-                speed = sprintSpeed;
+                speed = jumpSpeed;
             }
             else
             {
                 speed = originalSpeed;
             }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                playerBody.AddForce(new Vector3(0, jumpHeight, 0));
-                charAnim.SetTrigger("Jump");
-            }
-
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log("sptint");
+            isSprinting = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            isSprinting = false;
+        }
+
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            playerBody.AddForce(new Vector3(0, jumpHeight, 0));
+            charAnim.SetTrigger("Jump");
+        }
     }
 }

@@ -14,26 +14,26 @@ public class PauseMenu : MonoBehaviour
         {
             if(isPaused)
             {
-                isPaused = false;
                 unPause();
             }
             else
             {
-                isPaused = true;
                 Pause();
             }
         }
     }
     private void Pause()
     {
+        isPaused = true;
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         pauseMenu.SetActive(true);
         nonPauseMenu.SetActive(false);
     }
-    private void unPause()
+    public void unPause()
     {
+        isPaused = false;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
