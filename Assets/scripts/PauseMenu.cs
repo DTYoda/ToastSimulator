@@ -7,6 +7,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject nonPauseMenu;
     private bool isPaused = false;
+    public Animator anim;
+    public AnimationClip pause;
+    public AnimationClip unpause;
 
     private void Update()
     {
@@ -14,30 +17,39 @@ public class PauseMenu : MonoBehaviour
         {
             if(isPaused)
             {
-                unPause();
+                StartCoroutine("unPause");
             }
             else
             {
-                Pause();
+                StartCoroutine("Pause");
             }
         }
     }
-    private void Pause()
+    IEnumerator Pause()
     {
         isPaused = true;
         Time.timeScale = 0;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
         pauseMenu.SetActive(true);
         nonPauseMenu.SetActive(false);
+        anim.SetTrigger("Pause");
+        yield return new WaitForSecondsRealtime(pause.length);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
-    public void unPause()
+    IEnumerator unPause()
     {
         isPaused = false;
+        anim.SetTrigger("Unpause");
+        yield return new WaitForSecondsRealtime(unpause.length);
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         pauseMenu.SetActive(false);
         nonPauseMenu.SetActive(true);
+    }
+
+    public void unpauseButton()
+    {
+        StartCoroutine("unPause");
     }
 }
