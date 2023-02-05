@@ -11,6 +11,16 @@ public class PauseMenu : MonoBehaviour
     public AnimationClip pause;
     public AnimationClip unpause;
 
+    private GameObject player;
+    public Camera mainCamera;
+    private float x;
+    private float y;
+
+    private void Start()
+    {
+        player = GameObject.Find("Player");
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -27,6 +37,8 @@ public class PauseMenu : MonoBehaviour
     }
     IEnumerator Pause()
     {
+        x = mainCamera.transform.localEulerAngles.x;
+        y = player.transform.localEulerAngles.y;
         isPaused = true;
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
@@ -46,6 +58,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
         pauseMenu.SetActive(false);
         nonPauseMenu.SetActive(true);
+        player.GetComponent<CameraController>().resetXY(x, y);
     }
 
     public void unpauseButton()

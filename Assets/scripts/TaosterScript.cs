@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class TaosterScript : MonoBehaviour
 {
-    public GameObject questMarker1;
-    public GameObject questMarker2;
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("bread"))
-        {
-            Destroy(other.gameObject);
-            questMarker1.SetActive(true);
-            questMarker2.SetActive(true);
+    private GameObject player;
+    public Camera mainCamera;
 
-        }
+    private void Start()
+    {
+        player = GameObject.Find("Player");
     }
+    private void Update()
+    {
+        if(player.GetComponent<ItemPickup>().previousHit != null)
+        {
+            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, 3, 11) && player.GetComponent<ItemPickup>().previousHit.name == "bread" && Input.GetKeyDown(KeyCode.F))
+            {
+                player.GetComponent<ItemPickup>().previousHit.transform.GetChild(0).gameObject.SetActive(true);
+                player.GetComponent<ItemPickup>().previousHit.transform.GetChild(1).gameObject.SetActive(false);
+            }
+        }
+        
+    }
+
+
 }

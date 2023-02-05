@@ -22,7 +22,7 @@ public class ItemPickup : MonoBehaviour
 
     // Update is called once per frame
     RaycastHit hit;
-    GameObject previousHit = null;
+    public GameObject previousHit = null;
     Vector3 cameraPosition;
     void Update()
     {

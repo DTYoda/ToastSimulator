@@ -14,12 +14,6 @@ public class CameraController : MonoBehaviour
 	float rotY = 0f;
 	float rotX = 0f;
 
-	void Start()
-	{
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
-	}
-
 	void Update()
     {
         sensitivity = PlayerPrefs.GetInt("sens") / 5;
@@ -37,9 +31,25 @@ public class CameraController : MonoBehaviour
 	}
     private void FixedUpdate()
     {
-		transform.localEulerAngles = new Vector3(0, rotY, 0);
-		cam1.transform.localEulerAngles = new Vector3(-rotX, 0, 0);
-		cam2.transform.localEulerAngles = new Vector3(-rotX, 0, 0);
+		if(Time.timeScale == 1)
+        {
+			transform.localEulerAngles = new Vector3(0, rotY, 0);
+			cam1.transform.localEulerAngles = new Vector3(-rotX, 0, 0);
+			cam2.transform.localEulerAngles = new Vector3(-rotX, 0, 0);
+		}
+
 	}
+    public void resetXY(float x, float y)
+    {
+		rotY = y;
+		if(x > 180)
+        {
+			rotX = -x + 360;
+        }
+		else
+        {
+			rotX = -x;
+        }
+    }
 
 }
