@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ItemPickup : MonoBehaviour
 {
     public LayerMask mask;
+    public LayerMask doorMask;
     public Text interactText;
 
     private bool isLooking;
@@ -52,9 +53,11 @@ public class ItemPickup : MonoBehaviour
             isHolding = false;
         }
 
-        if(isLooking && hit.transform.gameObject.CompareTag("door"))
+        RaycastHit hitDoor;
+        Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hitDoor, castDistance, doorMask);
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, castDistance, doorMask) && hitDoor.transform.gameObject.CompareTag("door"))
         {
-            DoorOpener doorOpen= hit.transform.gameObject.GetComponent<DoorOpener>();
+            DoorOpener doorOpen= hitDoor.transform.gameObject.GetComponent<DoorOpener>();
             interactText.gameObject.SetActive(true);
             if (doorOpen.isOpen)
             {
@@ -69,7 +72,6 @@ public class ItemPickup : MonoBehaviour
                 doorOpen.isOpen = !doorOpen.isOpen;
                 interactText.gameObject.SetActive(false);
             }
-            previousHit = hit.transform.gameObject;
         }
 
         if (isLooking && hit.transform.gameObject.layer == 6)
@@ -90,6 +92,12 @@ public class ItemPickup : MonoBehaviour
         {
             if (previousHit.gameObject.layer == 8)
             {
+                RaycastHit hit1;
+                Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit1, castDistance);
+                if (hit1.transform.gameObject != previousHit)
+                {
+                    previousHit.transform.position = mainCamera.transform.position;
+                }
                 previousHit.GetComponent<Rigidbody>().useGravity = true;
                 previousHit.GetComponent<Rigidbody>().freezeRotation = false;
                 previousHit.layer = 6;
