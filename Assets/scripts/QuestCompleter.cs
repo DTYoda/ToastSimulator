@@ -6,19 +6,30 @@ public class QuestCompleter : MonoBehaviour
 {
     //must be the same as quest step
     public string questName;
+    public bool needsItem = false;
+    public string itemNeeded = "";
+    private GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.Find("Player");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 7)
+        QuestManager manager = player.GetComponentInParent<QuestManager>();
+        if (manager.hasQuest == true)
         {
-            QuestManager manager = other.gameObject.GetComponentInParent<QuestManager>();
-            if(manager.hasQuest == true)
+            if (manager.objectives[manager.currentStep] == questName)
             {
-                if (manager.objectives[manager.currentStep] == questName)
+                if (other.gameObject.layer == 7)
+                    manager.currentStep += 1;
+                else if (needsItem && other.gameObject.name == itemNeeded)
                 {
                     manager.currentStep += 1;
+                    Destroy(other.gameObject);
                 }
             }
-
         }
     }
 }

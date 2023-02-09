@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject nonPauseMenu;
     private bool isPaused = false;
+    public bool canPause = true;
     public Animator anim;
     public AnimationClip pause;
     public AnimationClip unpause;
@@ -29,7 +30,7 @@ public class PauseMenu : MonoBehaviour
             {
                 StartCoroutine("unPause");
             }
-            else
+            else if(Time.timeScale == 1)
             {
                 StartCoroutine("Pause");
             }

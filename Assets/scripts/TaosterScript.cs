@@ -6,6 +6,7 @@ public class TaosterScript : MonoBehaviour
 {
     private GameObject player;
     public Camera mainCamera;
+    public LayerMask mask;
 
     private void Start()
     {
@@ -13,13 +14,18 @@ public class TaosterScript : MonoBehaviour
     }
     private void Update()
     {
-        if(player.GetComponent<ItemPickup>().previousHit != null)
+        if(player.GetComponent<ItemPickup>().hit.transform != null)
         {
-            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, 3, 11) && player.GetComponent<ItemPickup>().previousHit.name == "bread" && Input.GetKeyDown(KeyCode.F))
+            RaycastHit hit;
+            Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 3, mask);   
+            if(hit.transform != null)
             {
-                player.GetComponent<ItemPickup>().previousHit.transform.GetChild(0).gameObject.SetActive(true);
-                player.GetComponent<ItemPickup>().previousHit.transform.GetChild(1).gameObject.SetActive(false);
-            }
+                if (hit.transform.name == this.gameObject.name && player.GetComponent<ItemPickup>().hit.transform.name == "bread" && Input.GetKeyDown(KeyCode.F))
+                {
+                    player.GetComponent<ItemPickup>().previousHit.transform.GetChild(0).gameObject.SetActive(true);
+                    player.GetComponent<ItemPickup>().previousHit.transform.GetChild(1).gameObject.SetActive(false);
+                }
+            }   
         }
         
     }

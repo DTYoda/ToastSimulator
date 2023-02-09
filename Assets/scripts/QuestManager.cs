@@ -32,7 +32,7 @@ public class QuestManager : MonoBehaviour
 
     private void Update()
     {
-        if (hasQuest)
+        if (hasQuest && currentStep < objectives.Length)
         {
             questText.text = currentQuest + ": " + objectives[currentStep];
             questBox.SetActive(true);
@@ -60,6 +60,14 @@ public class QuestManager : MonoBehaviour
             else
                 StartCoroutine("unexpandAnim");
 
+        }
+
+        if(currentStep == objectives.Length)
+        {
+            hasQuest = false;
+            acceptedQuest = 0;
+            currentStep = 0;
+            currentQuest = "";
         }
     }
 

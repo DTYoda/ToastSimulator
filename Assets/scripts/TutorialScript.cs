@@ -65,6 +65,7 @@ public class TutorialScript : MonoBehaviour
         yield return new WaitForSeconds(5);
         PlayerPrefs.SetInt("completeTutorial", 1);
         tutorialText.gameObject.SetActive(false);
+        tutorialBox.SetActive(false);
     }
 
     private bool questStep1()
@@ -77,11 +78,13 @@ public class TutorialScript : MonoBehaviour
     }
     private bool questStep2()
     {
-        if(player.GetComponent<ItemPickup>().previousHit.name == "bread")
+        if(player.GetComponent<ItemPickup>().previousHit != null)
         {
-            player.GetComponent<QuestManager>().currentStep += 1;
+            if (player.GetComponent<ItemPickup>().previousHit.name == "bread")
+            {
+                player.GetComponent<QuestManager>().currentStep += 1;
+            }
         }
-
         if (player.GetComponent<QuestManager>().currentStep == 2)
         {
             return true;
@@ -106,7 +109,7 @@ public class TutorialScript : MonoBehaviour
     }
     private bool questStep5()
     {
-        if (player.GetComponent<QuestManager>().currentStep == 5)
+        if (player.GetComponent<QuestManager>().currentStep == 0)
         {
             return true;
         }

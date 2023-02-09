@@ -22,7 +22,7 @@ public class ItemPickup : MonoBehaviour
     }
 
     // Update is called once per frame
-    RaycastHit hit;
+    public RaycastHit hit;
     public GameObject previousHit = null;
     Vector3 cameraPosition;
     void Update()
@@ -30,6 +30,7 @@ public class ItemPickup : MonoBehaviour
         if (previousHit == null)
         {
             isHolding = false;
+            isLooking = false;
         }
 
         cameraPosition = mainCamera.transform.position + (castDistance - 1) * mainCamera.transform.forward;
@@ -39,7 +40,7 @@ public class ItemPickup : MonoBehaviour
             isLooking = Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, castDistance, mask);
         }
 
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && hit.transform != null)
         {
             if (isLooking && hit.transform.gameObject.layer == 6)
             {
@@ -83,7 +84,7 @@ public class ItemPickup : MonoBehaviour
             }
         }
 
-        if ((previousHit != null && !isLooking))
+        if ((!isLooking && !Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, castDistance, doorMask)) || (!Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, castDistance, doorMask) && isHolding))
         {
             interactText.gameObject.SetActive(false);
         }
@@ -94,9 +95,12 @@ public class ItemPickup : MonoBehaviour
             {
                 RaycastHit hit1;
                 Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit1, castDistance);
-                if (hit1.transform.gameObject != previousHit)
+                if(hit1.transform != null)
                 {
-                    previousHit.transform.position = mainCamera.transform.position;
+                    if (hit1.transform.gameObject != previousHit)
+                    {
+                        previousHit.transform.position = mainCamera.transform.position;
+                    }
                 }
                 previousHit.GetComponent<Rigidbody>().useGravity = true;
                 previousHit.GetComponent<Rigidbody>().freezeRotation = false;

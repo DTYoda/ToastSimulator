@@ -14,7 +14,12 @@ public class MainMenuScript : MonoBehaviour
     {
         Time.timeScale = 0;
     }
+
     private void Start()
+    {
+        MainMenu();
+    }
+    public void MainMenu()
     {
         player = GameObject.Find("Player");
         startMenu.SetActive(true);
@@ -30,6 +35,7 @@ public class MainMenuScript : MonoBehaviour
     IEnumerator startGameAnim()
     {
         anim.SetTrigger("Start");
+        this.transform.GetChild(0).gameObject.SetActive(false);
         yield return new WaitForSecondsRealtime(animClip.length);
         Time.timeScale = 1;
         startMenu.SetActive(false);
