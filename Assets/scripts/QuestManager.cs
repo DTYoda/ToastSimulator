@@ -32,6 +32,13 @@ public class QuestManager : MonoBehaviour
 
     private void Update()
     {
+        if (currentStep == objectives.Length && objectives.Length != 0)
+        {
+            hasQuest = false;
+            acceptedQuest = 0;
+            currentStep = 0;
+            currentQuest = "";
+        }
         if (hasQuest && currentStep < objectives.Length)
         {
             questText.text = currentQuest + ": " + objectives[currentStep];
@@ -62,13 +69,7 @@ public class QuestManager : MonoBehaviour
 
         }
 
-        if(currentStep == objectives.Length)
-        {
-            hasQuest = false;
-            acceptedQuest = 0;
-            currentStep = 0;
-            currentQuest = "";
-        }
+        
     }
 
     public void Accept()

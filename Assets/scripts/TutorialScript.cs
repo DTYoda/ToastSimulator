@@ -29,21 +29,24 @@ public class TutorialScript : MonoBehaviour
     {
         tutorialText.gameObject.SetActive(true);
         tutorialBox.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        Time.timeScale = 0;
         tutorialText.text = "Welcome to Toastville! A small suburban town in America.";
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSecondsRealtime(4);
         tutorialText.text = "Toastville is obseced with bread, and more importantly, what you can make with it (toast!)";
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSecondsRealtime(5);
         tutorialText.text = "Here, people live breathe and eat toast, but there's a problem...";
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSecondsRealtime(4);
         tutorialText.text = "They're running out of bread!!";
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSecondsRealtime(3);
         tutorialText.text = "So, it's your mission to... Scavange for the rest of it!";
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSecondsRealtime(4);
         tutorialText.text = "That's right, instead of trying to solve the problem, you'll just contribute to it.";
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSecondsRealtime(5);
         tutorialText.text = "But hey, survival of the fittest.";
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSecondsRealtime(3);
         tutorialText.text = "First, let's go to the kitchen to see if there's anymore bread left in the house. use WSAD to move and F to open doors.";
+        Time.timeScale = 1;
         yield return new WaitUntil(questStep1);
         tutorialText.text = "Great! There's still some left! Try picking it up by clicking the mouse.";
         yield return new WaitUntil(questStep2);
@@ -114,5 +117,13 @@ public class TutorialScript : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            PlayerPrefs.SetInt("completeTutorial", 0);
+        }
     }
 }
