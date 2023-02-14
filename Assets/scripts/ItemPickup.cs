@@ -75,7 +75,7 @@ public class ItemPickup : MonoBehaviour
             }
         }
 
-        if (isLooking && hit.transform.gameObject.layer == 6)
+        if (hit.transform != null && isLooking && hit.transform.gameObject.layer == 6)
         {
             interactText.gameObject.SetActive(true);
             if (!isHolding)

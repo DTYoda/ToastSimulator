@@ -7,6 +7,7 @@ public class QuestManager : MonoBehaviour
 {
     public string[] objectives;
     public string currentQuest;
+    public int questXP = 0;
 
     public Text questText;
     public GameObject questBox;
@@ -24,52 +25,36 @@ public class QuestManager : MonoBehaviour
     public Text expandedQuestAuthor;
     public Text expandedQuestList;
 
+    public Text levelText;
+    public Slider levelSlider;
+    public Text xpText;
+
     private bool isExpanded;
     private bool canExpand = true;
 
     private void Start()
-    {    }
+    {
+        if (PlayerPrefs.GetInt("requiredXP") == 0)
+        {
+            PlayerPrefs.SetInt("requiredXP", 5);
+        }
+        if (PlayerPrefs.GetInt("lvl") == 0)
+        {
+            PlayerPrefs.SetInt("lvl", 1);
+        }
+    }
 
     private void Update()
     {
-        if (currentStep == objectives.Length && objectives.Length != 0)
-        {
-            hasQuest = false;
-            acceptedQuest = 0;
-            currentStep = 0;
-            currentQuest = "";
-        }
-        if (hasQuest && currentStep < objectives.Length)
-        {
-            questText.text = currentQuest + ": " + objectives[currentStep];
-            questBox.SetActive(true);
+        resetQuest();
 
-            expandedQuestTitle.text = currentQuest;
+        writeQuestDetails();
 
-            if(expandedQuestList.text == "")
-            {
-                for (int i = 1; i <= objectives.Length; i++)
-                {
-                    expandedQuestList.text += i + ". " + objectives[i - 1] + "\n";
-                }
-            }
-        }
-        else
-        {
-            questText.text = "";
-            questBox.SetActive(false);
-        }
-        
-        if(Input.GetKeyDown(KeyCode.Q) && canExpand)
-        {
-            if (!isExpanded)
-                StartCoroutine("expandAnim");
-            else
-                StartCoroutine("unexpandAnim");
+        expandDropDown();
 
-        }
+        checkNextLevel();
 
-        
+        writeLevelSlider();
     }
 
     public void Accept()
@@ -103,5 +88,71 @@ public class QuestManager : MonoBehaviour
         questText.gameObject.SetActive(true);
         isExpanded = false;
         canExpand = true;
+    }
+
+    private void resetQuest()
+    {
+        if (currentStep == objectives.Length && objectives.Length != 0)
+        {
+            hasQuest = false;
+            acceptedQuest = 0;
+            currentStep = 0;
+            currentQuest = "";
+            PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + questXP);
+            questXP = 0;
+            expandedQuestList.text = "";
+        }
+    }
+    private void writeQuestDetails()
+    {
+        if (hasQuest && currentStep < objectives.Length)
+        {
+            questText.text = currentQuest + ": " + objectives[currentStep];
+            questBox.SetActive(true);
+
+            expandedQuestTitle.text = currentQuest;
+
+            if (expandedQuestList.text == "")
+            {
+                for (int i = 1; i <= objectives.Length; i++)
+                {
+                    expandedQuestList.text += i + ". " + objectives[i - 1] + "\n";
+                }
+            }
+        }
+        else
+        {
+            questText.text = "";
+            questBox.SetActive(false);
+        }
+    }
+    
+    private void expandDropDown()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && canExpand)
+        {
+            if (!isExpanded)
+                StartCoroutine("expandAnim");
+            else
+                StartCoroutine("unexpandAnim");
+
+        }
+    }
+
+    private void checkNextLevel()
+    {
+        if (PlayerPrefs.GetInt("XP") >= PlayerPrefs.GetInt("requiredXP"))
+        {
+            PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") - PlayerPrefs.GetInt("requiredXP"));
+            PlayerPrefs.SetInt("requiredXP", PlayerPrefs.GetInt("requiredXP") + 2 * PlayerPrefs.GetInt("lvl") + 1);
+            PlayerPrefs.SetInt("lvl", PlayerPrefs.GetInt("lvl") + 1);
+        }
+    }
+
+    private void writeLevelSlider()
+    {
+        levelSlider.value = (float) PlayerPrefs.GetInt("XP") / PlayerPrefs.GetInt("requiredXP");
+        levelText.text = PlayerPrefs.GetInt("lvl").ToString();
+        xpText.text = PlayerPrefs.GetInt("XP") + "/" + PlayerPrefs.GetInt("requiredXP");
     }
 }

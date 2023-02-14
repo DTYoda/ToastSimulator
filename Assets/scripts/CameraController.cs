@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
 
 	void Update()
     {
-        sensitivity = PlayerPrefs.GetInt("sens") / 5;
+        sensitivity = (float) (PlayerPrefs.GetInt("sens") / 10.0);
 
         rotY += Input.GetAxis("Mouse X") * sensitivity;
 		rotX += Input.GetAxis("Mouse Y") * sensitivity;

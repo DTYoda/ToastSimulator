@@ -15,6 +15,11 @@ public class Settings : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerPrefs.GetInt("sens") == 0)
+        {
+            PlayerPrefs.SetInt("sens", 50);
+        }
+
         volumeSlider.value = PlayerPrefs.GetInt("volume");
         sensitivitySlider.value = PlayerPrefs.GetInt("sens");
 

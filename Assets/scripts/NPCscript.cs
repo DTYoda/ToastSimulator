@@ -8,18 +8,18 @@ public class NPCscript : MonoBehaviour
     //INDEX 0 MUST BE DIALOG FOR RECIEVING QUEST
     public string[] dialog;
     public string[] questObjectives;
+    public int questXP;
+    public bool hasQuest;
+    public string npcName;
+    public string questName;
 
     public GameObject player;
     public Rigidbody body;
 
     private bool isSpeaking;
     private bool isInside;
-    public bool hasQuest;
     private bool completeQuest;
     private bool acceptedQuest;
-
-    public string npcName;
-    public string questName;
 
     private int speakText;
     public Text interactText;
@@ -109,6 +109,7 @@ public class NPCscript : MonoBehaviour
                 player.GetComponent<QuestManager>().currentStep = 0;
                 player.GetComponent<QuestManager>().objectives = questObjectives;
                 player.GetComponent<QuestManager>().currentQuest = questName;
+                player.GetComponent<QuestManager>().questXP = questXP;
                 questAcceptObject.SetActive(false);
                 player.GetComponent<QuestManager>().acceptedQuest = 0;
                 Cursor.lockState = CursorLockMode.Locked;
