@@ -18,7 +18,7 @@ public class QuestCompleter : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         QuestManager manager = player.GetComponentInParent<QuestManager>();
-        if (manager.hasQuest == true)
+        if (manager.hasQuest == true && manager.objectives.Length > 0)
         {
             if (manager.objectives[manager.currentStep] == questName)
             {

@@ -131,6 +131,10 @@ public class TutorialScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P))
         {
             PlayerPrefs.SetInt("completeTutorial", 0);
+            PlayerPrefs.SetInt("XP", 0);
+            PlayerPrefs.SetInt("lvl", 0);
+            PlayerPrefs.SetInt("requiredXP", 0);
+            PlayerPrefs.SetString("quests", "");
         }
     }
 }

@@ -27,6 +27,7 @@ public class ItemPickup : MonoBehaviour
     Vector3 cameraPosition;
     void Update()
     {
+
         if (previousHit == null)
         {
             isHolding = false;
@@ -94,7 +95,8 @@ public class ItemPickup : MonoBehaviour
             if (previousHit.gameObject.layer == 8)
             {
                 RaycastHit hit1;
-                Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit1, castDistance);
+                Physics.Raycast(mainCamera.transform.position, (previousHit.transform.position - mainCamera.transform.position).normalized, out hit1, castDistance, mask);
+                
                 if(hit1.transform != null)
                 {
                     if (hit1.transform.gameObject != previousHit)

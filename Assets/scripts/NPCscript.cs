@@ -13,7 +13,7 @@ public class NPCscript : MonoBehaviour
     public string npcName;
     public string questName;
 
-    public GameObject player;
+    private GameObject player;
     public Rigidbody body;
 
     private bool isSpeaking;
@@ -31,6 +31,12 @@ public class NPCscript : MonoBehaviour
     {
         body = this.gameObject.GetComponent<Rigidbody>();
         interactText.gameObject.SetActive(false);
+        player = GameObject.Find("Player");
+
+        if(PlayerPrefs.GetString("quests").Contains(questName))
+        {
+            completeQuest = true;
+        }
     }
 
     // Update is called once per frame
@@ -49,7 +55,7 @@ public class NPCscript : MonoBehaviour
         {
             if (!isSpeaking)
             {
-                interactText.text = "Press F to speak with... " + npcName;
+                interactText.text = "Press F to speak with " + npcName;
             }
             interactText.gameObject.SetActive(true);
             if (Input.GetKeyDown(KeyCode.F))
@@ -66,6 +72,8 @@ public class NPCscript : MonoBehaviour
         {
             questIcon.SetActive(false);
         }
+
+        checkForCompletion();
 
     }
 
@@ -158,5 +166,15 @@ public class NPCscript : MonoBehaviour
             questIcon.transform.position += new Vector3(0, 0.5f * Time.deltaTime, 0);
         }
 
+    }
+
+    private void checkForCompletion()
+    {
+        QuestManager manager = player.GetComponent<QuestManager>();
+        if(acceptedQuest && manager.currentQuest != questName && completeQuest == false)
+        {
+            completeQuest = true;
+            PlayerPrefs.SetString("quests", PlayerPrefs.GetString("quests") + " " + questName);
+        }
     }
 }
