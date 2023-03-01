@@ -129,7 +129,7 @@ public class QuestManager : MonoBehaviour
     
     private void expandDropDown()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && canExpand)
+        if (Input.GetKeyDown(KeyCode.Q) && canExpand && hasQuest)
         {
             if (!isExpanded)
                 StartCoroutine("expandAnim");

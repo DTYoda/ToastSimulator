@@ -27,8 +27,12 @@ public class NPCscript : MonoBehaviour
     public GameObject questAcceptObject;
 
     private bool isLooking;
+
+    Vector3 lookPosition;
     void Start()
     {
+        lookPosition = this.transform.position;
+
         body = this.gameObject.GetComponent<Rigidbody>();
         interactText.gameObject.SetActive(false);
         player = GameObject.Find("Player");
@@ -42,28 +46,40 @@ public class NPCscript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 lookPosition = new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z);
+        //makes the NPC look towards the player if they're in the same room     
+        RaycastHit hitPlayer;
+        Physics.Raycast(this.transform.position, (player.transform.position - this.transform.position).normalized, out hitPlayer);
+        if(hitPlayer.transform.gameObject.CompareTag("Player"))
+        {
+            lookPosition = new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z);
+        }
         Quaternion rotation = Quaternion.LookRotation(lookPosition);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2);
 
+        //If the player is speaking with the NPC, call the AskForQuest function
         if (isSpeaking)
         {
             AskForQuest();
-
         }
+
+        //If the Player is within the NPC's radius
         if (isInside)
         {
+            //if you're not already speaking with the NPC, set text to pre-speaking text
             if (!isSpeaking)
             {
                 interactText.text = "Press F to speak with " + npcName;
             }
             interactText.gameObject.SetActive(true);
+            //if F key is pressed, initiate speaking
             if (Input.GetKeyDown(KeyCode.F))
             {
                 speakText = Random.Range(1, dialog.Length);
                 isSpeaking = true;
             }
         }
+
+        //If this NPC has a quest and it has not been accepted or completed, show a quest icon above its head
         if (hasQuest && !acceptedQuest && !completeQuest)
         {
             QuestIcon();
@@ -73,6 +89,7 @@ public class NPCscript : MonoBehaviour
             questIcon.SetActive(false);
         }
 
+        //constantly check if this NPC's quest has been completed
         checkForCompletion();
 
     }
@@ -101,7 +118,8 @@ public class NPCscript : MonoBehaviour
 
     private void AskForQuest()
     {
-        if (hasQuest && !acceptedQuest && !completeQuest && player.GetComponent<QuestManager>().hasQuest == false)
+        QuestManager manager = player.GetComponent<QuestManager>();
+        if (hasQuest && !acceptedQuest && !completeQuest && manager.hasQuest == false)
         {
             speakText = 0;
             interactText.text = dialog[speakText];
@@ -111,25 +129,25 @@ public class NPCscript : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0;
-            if (player.GetComponent<QuestManager>().acceptedQuest == 1)
+            if (manager.acceptedQuest == 1)
             {
-                player.GetComponent<QuestManager>().hasQuest = true;
-                player.GetComponent<QuestManager>().currentStep = 0;
-                player.GetComponent<QuestManager>().objectives = questObjectives;
-                player.GetComponent<QuestManager>().currentQuest = questName;
-                player.GetComponent<QuestManager>().questXP = questXP;
+                manager.hasQuest = true;
+                manager.currentStep = 0;
+                manager.objectives = questObjectives;
+                manager.currentQuest = questName;
+                manager.questXP = questXP;
                 questAcceptObject.SetActive(false);
-                player.GetComponent<QuestManager>().acceptedQuest = 0;
+                manager.acceptedQuest = 0;
                 Cursor.lockState = CursorLockMode.Locked;
                 acceptedQuest = true;
                 Cursor.visible = false;
                 Time.timeScale = 1;
             }
-            else if (player.GetComponent<QuestManager>().acceptedQuest == -1)
+            else if (manager.acceptedQuest == -1)
             {
                 isSpeaking = false;
                 questAcceptObject.SetActive(false);
-                player.GetComponent<QuestManager>().acceptedQuest = 0;
+                manager.acceptedQuest = 0;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 Time.timeScale = 1;
