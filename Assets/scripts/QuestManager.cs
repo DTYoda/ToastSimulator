@@ -8,6 +8,7 @@ public class QuestManager : MonoBehaviour
     public string[] objectives;
     public string currentQuest;
     public int questXP = 0;
+    public string questDesc;
 
     public Text questText;
     public GameObject questBox;
@@ -24,6 +25,7 @@ public class QuestManager : MonoBehaviour
     public Text expandedQuestTitle;
     public Text expandedQuestAuthor;
     public Text expandedQuestList;
+    public Text expandedQuestDesc;
 
     public Text levelText;
     public Slider levelSlider;
@@ -119,6 +121,8 @@ public class QuestManager : MonoBehaviour
                     expandedQuestList.text += i + ". " + objectives[i - 1] + "\n";
                 }
             }
+
+            expandedQuestDesc.text = questDesc;
         }
         else
         {

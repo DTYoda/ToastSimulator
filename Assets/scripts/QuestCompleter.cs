@@ -17,19 +17,23 @@ public class QuestCompleter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        QuestManager manager = player.GetComponentInParent<QuestManager>();
-        if (manager.hasQuest == true && manager.objectives.Length > 0)
+        if(player != null)
         {
-            if (manager.objectives[manager.currentStep] == questName)
+            QuestManager manager = player.GetComponent<QuestManager>();
+            if (manager.hasQuest == true && manager.objectives.Length > manager.currentStep)
             {
-                if (other.gameObject.layer == 7)
-                    manager.currentStep += 1;
-                else if (needsItem && other.gameObject.name == itemNeeded)
+                if (manager.objectives[manager.currentStep] == questName)
                 {
-                    manager.currentStep += 1;
-                    Destroy(other.gameObject);
+                    if (other.gameObject.layer == 7 && !needsItem)
+                        manager.currentStep += 1;
+                    else if (needsItem && other.gameObject.name == itemNeeded)
+                    {
+                        manager.currentStep += 1;
+                        other.gameObject.GetComponent<QuestItemScript>().destroyItem();
+                    }
                 }
             }
         }
+        
     }
 }

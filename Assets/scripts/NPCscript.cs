@@ -12,14 +12,15 @@ public class NPCscript : MonoBehaviour
     public bool hasQuest;
     public string npcName;
     public string questName;
+    public string questDescription;
 
     private GameObject player;
     public Rigidbody body;
 
     private bool isSpeaking;
     private bool isInside;
-    private bool completeQuest;
-    private bool acceptedQuest;
+    private bool completeQuest = false;
+    private bool acceptedQuest = false;
 
     private int speakText;
     public Text interactText;
@@ -138,6 +139,7 @@ public class NPCscript : MonoBehaviour
                 manager.questXP = questXP;
                 questAcceptObject.SetActive(false);
                 manager.acceptedQuest = 0;
+                manager.questDesc = questDescription;
                 Cursor.lockState = CursorLockMode.Locked;
                 acceptedQuest = true;
                 Cursor.visible = false;
