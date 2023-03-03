@@ -24,6 +24,7 @@ public class NPCscript : MonoBehaviour
 
     private int speakText;
     public Text interactText;
+    public GameObject speechText;
     public Text[] acceptedQuestTexts;
     public GameObject questAcceptObject;
 
@@ -75,7 +76,8 @@ public class NPCscript : MonoBehaviour
             //if F key is pressed, initiate speaking
             if (Input.GetKeyDown(KeyCode.F))
             {
-                speakText = Random.Range(1, dialog.Length);
+                if(canSpeak)
+                    speakText = Random.Range(1, dialog.Length);
                 isSpeaking = true;
             }
         }
@@ -111,19 +113,26 @@ public class NPCscript : MonoBehaviour
         {
             interactText.gameObject.SetActive(false);
             interactText.text = "";
+            speechText.gameObject.SetActive(false);
+            StopAllCoroutines();
+            canSpeak = true;
             isSpeaking = false;
             isInside = false;
         }
 
     }
 
+    bool canSpeak = true;
     private void AskForQuest()
     {
         QuestManager manager = player.GetComponent<QuestManager>();
         if (hasQuest && !acceptedQuest && !completeQuest && manager.hasQuest == false)
         {
             speakText = 0;
-            interactText.text = dialog[speakText];
+            if (canSpeak)
+            {
+                StartCoroutine("speakTimed");
+            }
             questAcceptObject.SetActive(true);
             acceptedQuestTexts[0].text = "Accept Quest: " + questName + "?";
             acceptedQuestTexts[1].text = "This Quest Has " + questObjectives.Length + " steps";
@@ -153,13 +162,17 @@ public class NPCscript : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 Time.timeScale = 1;
+                manager.acceptedQuest = 0;
             }
 
 
         }
         else
         {
-            interactText.text = dialog[speakText];
+            if (canSpeak)
+            {
+                StartCoroutine("speakTimed");
+            }
         }
     }
 
@@ -196,5 +209,25 @@ public class NPCscript : MonoBehaviour
             completeQuest = true;
             PlayerPrefs.SetString("quests", PlayerPrefs.GetString("quests") + " " + questName);
         }
+    }
+
+    IEnumerator speakTimed()
+    {
+        canSpeak = false;
+        Text text = speechText.transform.GetChild(0).GetComponent<Text>();
+        if (!(text.text == dialog[speakText] && speechText.activeSelf))
+        {  
+            text.text = "";
+            speechText.gameObject.SetActive(true);
+            for (int i = 0; i < dialog[speakText].Length; i++)
+            {
+                text.text += dialog[speakText][i];
+                if(speakText == 0)
+                    yield return new WaitForSecondsRealtime(0.05f);
+                else
+                    yield return new WaitForSeconds(0.05f);
+            }
+        }
+        canSpeak = true;
     }
 }
