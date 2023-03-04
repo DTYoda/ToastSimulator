@@ -13,7 +13,7 @@ public class ItemPickup : MonoBehaviour
     private bool isHolding = false;
     public Camera mainCamera;
 
-    public float itemSpeed = 20;
+    public float itemSpeed = 30;
 
     public float castDistance;
     // Start is called before the first frame update
@@ -117,12 +117,10 @@ public class ItemPickup : MonoBehaviour
         {
             interactText.gameObject.SetActive(false);
         }
-    }
-    private void FixedUpdate()
-    {
+
         if (isHolding && previousHit != null)
         {
-            if(previousHit.layer == 6)
+            if (previousHit.layer == 6)
             {
                 interactText.gameObject.SetActive(false);
             }
@@ -135,5 +133,9 @@ public class ItemPickup : MonoBehaviour
             previousHit.transform.eulerAngles = new Vector3(previousHit.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, previousHit.transform.eulerAngles.z);
 
         }
+    }
+    private void FixedUpdate()
+    {
+        
     }
 }

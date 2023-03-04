@@ -34,6 +34,9 @@ public class QuestManager : MonoBehaviour
     private bool isExpanded;
     private bool canExpand = true;
 
+    public AudioSource questAudioSource;
+    public AudioClip[] questAudioClips;
+
     private void Start()
     {
         if (PlayerPrefs.GetInt("requiredXP") == 0)
@@ -103,6 +106,8 @@ public class QuestManager : MonoBehaviour
             PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + questXP);
             questXP = 0;
             expandedQuestList.text = "";
+            questAudioSource.clip = questAudioClips[0];
+            questAudioSource.Play(); 
         }
     }
     private void writeQuestDetails()
@@ -158,5 +163,11 @@ public class QuestManager : MonoBehaviour
         levelSlider.value = (float) PlayerPrefs.GetInt("XP") / PlayerPrefs.GetInt("requiredXP");
         levelText.text = PlayerPrefs.GetInt("lvl").ToString();
         xpText.text = PlayerPrefs.GetInt("XP") + "/" + PlayerPrefs.GetInt("requiredXP");
+    }
+
+    public void CompleteQuestSound()
+    {
+        questAudioSource.clip = questAudioClips[0];
+        questAudioSource.Play();
     }
 }

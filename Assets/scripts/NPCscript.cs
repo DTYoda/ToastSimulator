@@ -17,12 +17,12 @@ public class NPCscript : MonoBehaviour
     private GameObject player;
     public Rigidbody body;
 
-    private bool isSpeaking;
+    public bool isSpeaking;
     private bool isInside;
     private bool completeQuest = false;
     private bool acceptedQuest = false;
 
-    private int speakText;
+    public int speakText;
     public Text interactText;
     public GameObject speechText;
     public Text[] acceptedQuestTexts;

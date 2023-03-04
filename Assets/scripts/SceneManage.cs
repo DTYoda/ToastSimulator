@@ -8,8 +8,9 @@ public class SceneManage : MonoBehaviour
     public bool flappyBirdQuest;
     public int flappyBirdRequired;
     public bool completeFlappyBird;
+    public int flappyBirdXP;
 
-    public Vector3 playerLocation;
+    public Vector3 playerLocation = Vector3.zero;
     public GameObject player;
 
     public bool returned = false;
@@ -57,24 +58,44 @@ public class SceneManage : MonoBehaviour
     public void Return()
     {
         returned = true;
-        SceneManager.LoadScene("Level1");
+
+        if (flappyBirdQuest)
+        {
+            if (completeFlappyBird)
+            {
+                PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + flappyBirdXP);
+                PlayerPrefs.SetString("quests", PlayerPrefs.GetString("quests") + " Missing Child");
+            }
+            else
+            {
+
+            }
+        }
+
+            SceneManager.LoadScene("Level1");
         
     }
+
     public void Return2()
     {
         returned = false;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        Time.timeScale = 1;
-        GameObject.Find("MainMenu").SetActive(false);
-
         if (player != null)
         {
-            player.transform.position = playerLocation;
+            QuestManager manager = player.GetComponent<QuestManager>();
+            if (flappyBirdQuest)
+            {
+                flappyBirdQuest = false;
+                flappyBirdRequired = 0;
+                if (completeFlappyBird)
+                {
+                    manager.CompleteQuestSound();
+                }
+                else
+                {
+
+                }
+            }
         }
-        else
-        {
-            Debug.Log("failed");
-        }
+        GameObject.Find("MainMenu").GetComponent<MainMenuScript>().StartGameNoAnim(playerLocation);
     }
 }
