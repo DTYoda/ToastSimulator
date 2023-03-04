@@ -8,10 +8,20 @@ public class DayLightCycle : MonoBehaviour
     public GameObject moon;
 
     public float dayLightSpeed;
+
+    public GameObject sceneManage;
     // Start is called before the first frame update
     void Start()
     {
-        
+        sceneManage = GameObject.Find("SCENEMANAGER");
+        if(sceneManage != null)
+        {
+            sceneManage.GetComponent<SceneManage>().player = GameObject.Find("Player");
+            if (sceneManage.GetComponent<SceneManage>().returned)
+            {
+                sceneManage.GetComponent<SceneManage>().Return2();
+            } 
+        }
     }
 
     // Update is called once per frame
