@@ -70,25 +70,7 @@ public class ItemPickup : MonoBehaviour
             }
         }
 
-        if (!isHolding && previousHit != null)
-        {
-            if (previousHit.gameObject.layer == 8)
-            {
-                RaycastHit hit1;
-                Physics.Raycast(mainCamera.transform.position, (previousHit.transform.position - mainCamera.transform.position).normalized, out hit1, castDistance, mask);
 
-                if (hit1.transform != null)
-                {
-                    if (hit1.transform.gameObject != previousHit)
-                    {
-                        previousHit.transform.position = mainCamera.transform.position;
-                    }
-                }
-                previousHit.GetComponent<Rigidbody>().useGravity = true;
-                previousHit.GetComponent<Rigidbody>().freezeRotation = false;
-                previousHit.layer = 6;
-            }
-        }
 
         //checks if you are looking at or opening a door
         RaycastHit hitDoor;
@@ -134,8 +116,28 @@ public class ItemPickup : MonoBehaviour
 
         }
     }
+
+    public LayerMask mask2;
     private void FixedUpdate()
     {
-        
+        if (!isHolding && previousHit != null)
+        {
+            if (previousHit.gameObject.layer == 8)
+            {
+                RaycastHit hit1;
+                Physics.Raycast(mainCamera.transform.position, (previousHit.transform.position - mainCamera.transform.position).normalized, out hit1, castDistance, mask2);
+
+                if (hit1.transform != null)
+                {
+                    if (hit1.transform.gameObject != previousHit)
+                    {
+                        previousHit.transform.position = mainCamera.transform.position;
+                    }
+                }
+                previousHit.GetComponent<Rigidbody>().useGravity = true;
+                previousHit.GetComponent<Rigidbody>().freezeRotation = false;
+                previousHit.layer = 6;
+            }
+        }
     }
 }
