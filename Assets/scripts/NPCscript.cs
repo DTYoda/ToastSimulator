@@ -9,6 +9,7 @@ public class NPCscript : MonoBehaviour
     public string[] dialog;
     public string[] questObjectives;
     public int questXP;
+    public float questCash;
     public bool hasQuest;
     public string npcName;
     public string questName;
@@ -146,6 +147,7 @@ public class NPCscript : MonoBehaviour
                 manager.objectives = questObjectives;
                 manager.currentQuest = questName;
                 manager.questXP = questXP;
+                manager.questCash = questCash;
                 questAcceptObject.SetActive(false);
                 manager.acceptedQuest = 0;
                 manager.questDesc = questDescription;
