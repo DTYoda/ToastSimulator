@@ -8,7 +8,6 @@ public class QuestManager : MonoBehaviour
     public string[] objectives;
     public string currentQuest;
     public int questXP = 0;
-    public float questCash = 0;
     public string questDesc;
 
     public Text questText;
@@ -31,7 +30,6 @@ public class QuestManager : MonoBehaviour
     public Text levelText;
     public Slider levelSlider;
     public Text xpText;
-    public Text cashText;
 
     private bool isExpanded;
     private bool canExpand = true;
@@ -106,7 +104,6 @@ public class QuestManager : MonoBehaviour
             currentStep = 0;
             currentQuest = "";
             PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + questXP);
-            PlayerPrefs.SetFloat("money", PlayerPrefs.GetFloat("money") + questCash);
             questXP = 0;
             expandedQuestList.text = "";
             questAudioSource.clip = questAudioClips[0];
@@ -166,7 +163,6 @@ public class QuestManager : MonoBehaviour
         levelSlider.value = (float) PlayerPrefs.GetInt("XP") / PlayerPrefs.GetInt("requiredXP");
         levelText.text = PlayerPrefs.GetInt("lvl").ToString();
         xpText.text = PlayerPrefs.GetInt("XP") + "/" + PlayerPrefs.GetInt("requiredXP");
-        cashText.text = PlayerPrefs.GetFloat("money").ToString("F2") + "$";
     }
 
     public void CompleteQuestSound()
