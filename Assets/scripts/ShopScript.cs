@@ -49,6 +49,8 @@ public class ShopScript : MonoBehaviour
     public void ShopExit()
     {
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         shopMenu.SetActive(false);
     }
 }
