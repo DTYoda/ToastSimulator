@@ -50,6 +50,8 @@ public class CameraController : MonoBehaviour
         {
 			rotX = -x;
         }
-    }
+		transform.localEulerAngles = new Vector3(0, rotY, 0);
+		cam1.transform.localEulerAngles = new Vector3(-rotX, 0, 0);
+	}
 
 }
