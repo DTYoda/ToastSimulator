@@ -21,10 +21,15 @@ public class MainMenuScript : MonoBehaviour
     }
     public void MainMenu()
     {
+        Time.timeScale = 1;
+        player.transform.GetChild(0).gameObject.GetComponent<CapsuleCollider>().enabled = true;
+        player.GetComponent<CameraController>().resetXY(0, 180);
         startMenu.SetActive(true);
+        startMenu.transform.GetChild(0).gameObject.SetActive(true);
         player.transform.eulerAngles = new Vector3(0, 180, 0);
-        player.transform.GetChild(0).gameObject.GetComponent<CapsuleCollider>().enabled = false;
         player.GetComponent<Animator>().enabled = true;
+        player.transform.GetChild(0).gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        Time.timeScale = 0;
     }
 
     public void startGame()
@@ -61,4 +66,10 @@ public class MainMenuScript : MonoBehaviour
         player.GetComponent<CameraController>().resetXY(0, 180);
         player.transform.position = location;
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }

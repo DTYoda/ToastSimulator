@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -65,5 +66,10 @@ public class PauseMenu : MonoBehaviour
     public void unpauseButton()
     {
         StartCoroutine("unPause");
+    }
+
+    public void UnpauseVariable()
+    {
+        SceneManager.LoadScene("Level1");
     }
 }
