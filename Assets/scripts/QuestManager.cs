@@ -53,6 +53,8 @@ public class QuestManager : MonoBehaviour
 
     private void Update()
     {
+        questAudioSource.volume = PlayerPrefs.GetInt("volume") / 100.0f;
+
         resetQuest();
 
         writeQuestDetails();
