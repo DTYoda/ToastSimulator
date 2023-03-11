@@ -52,7 +52,7 @@ public class NPCscript : MonoBehaviour
         //makes the NPC look towards the player if they're in the same room     
         RaycastHit hitPlayer;
         Physics.Raycast(this.transform.position, (player.transform.position - this.transform.position).normalized, out hitPlayer);
-        if(hitPlayer.transform.gameObject.CompareTag("Player"))
+        if(hitPlayer.transform != null && hitPlayer.transform.gameObject.CompareTag("Player"))
         {
             lookPosition = new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z);
         }
@@ -136,7 +136,7 @@ public class NPCscript : MonoBehaviour
             }
             questAcceptObject.SetActive(true);
             acceptedQuestTexts[0].text = "Accept Quest: " + questName + "?";
-            acceptedQuestTexts[1].text = "This Quest Has " + questObjectives.Length + " steps";
+            acceptedQuestTexts[1].text = questDescription;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0;
