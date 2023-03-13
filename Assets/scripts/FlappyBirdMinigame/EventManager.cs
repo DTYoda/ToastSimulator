@@ -8,17 +8,25 @@ public class EventManager : MonoBehaviour
     public GameObject game;
     public Text highscoreText;
     public GameObject sceneManger;
+    public GameObject questCompletion;
+
+    public AudioSource source;
+    public AnimationClip clip;
+    bool completionSound = false;
 
     bool quest;
     int required;
     void Start()
     {
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().volume = PlayerPrefs.GetInt("volume") / 100.0f;
+
         sceneManger = GameObject.Find("SCENEMANAGER");
+        source.volume = PlayerPrefs.GetInt("volume") / 100.0f;
         if(sceneManger != null)
         {
             quest = sceneManger.GetComponent<SceneManage>().flappyBirdQuest;
             required = sceneManger.GetComponent<SceneManage>().flappyBirdRequired;
-        }    
+        }
     }
 
     // Update is called once per frame
@@ -29,6 +37,10 @@ public class EventManager : MonoBehaviour
         if(quest && required <= player.GetComponent<BirdControl>().score)
         {
             sceneManger.GetComponent<SceneManage>().completeFlappyBird = true;
+            if(!completionSound)
+            {
+                StartCoroutine("QuestCompletion");
+            }
         }
     }
 
@@ -66,5 +78,15 @@ public class EventManager : MonoBehaviour
         {
             sceneManger.GetComponent<SceneManage>().Return();
         }
+    }
+
+    IEnumerator QuestCompletion()
+    {
+        completionSound = true;
+        questCompletion.SetActive(true);
+        questCompletion.GetComponent<Animator>().SetTrigger("play");
+        source.Play();
+        yield return new WaitForSecondsRealtime(clip.length);
+        questCompletion.SetActive(false);
     }
 }

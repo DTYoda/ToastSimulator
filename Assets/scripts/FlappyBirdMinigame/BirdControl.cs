@@ -10,11 +10,15 @@ public class BirdControl : MonoBehaviour
     float jump = 220;
     public Text scoreText;
 
+    public AudioClip[] sounds;
+    public AudioSource source;
+
 
     public GameObject gameOverMenu;
     public int score;
     void Start()
     {
+        source.volume = PlayerPrefs.GetInt("volume") / 100.0f;
         rb = this.GetComponent<Rigidbody2D>();
     }
 
@@ -23,6 +27,8 @@ public class BirdControl : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            source.clip = sounds[1];
+            source.Play();
             rb.velocity = Vector2.up * jump;
         }
 
@@ -44,6 +50,8 @@ public class BirdControl : MonoBehaviour
 
     private void GameOver()
     {
+        source.clip = sounds[0];
+        source.Play();
         gameOverMenu.SetActive(true);
         Time.timeScale = 0;
     }    

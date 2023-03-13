@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    float speed = 70;
+    float speed = 100;
     float gap;
+
+    public AudioSource source;
 
     GameObject player;
     void Start()
     {
+        source.volume = PlayerPrefs.GetInt("volume") / 100.0f;
         player = GameObject.Find("Toast");
 
         gap = Random.Range(300, 500);
-        float size1 = 1060 - gap - Random.Range(0, 1060 - gap);
-        float size2 = 1060 - gap - size1;
-        this.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(100, size1);
-        this.transform.GetChild(0).GetComponent<BoxCollider2D>().size = new Vector2(100, size1);
-        this.transform.GetChild(0).GetComponent<BoxCollider2D>().offset = new Vector2(0, -size1 / 2);
+        float size1 = Random.Range(gap, 1060);
+        float size2 = -(1060-size1-50) - gap;
+        this.transform.GetChild(0).localPosition = new Vector3(this.transform.GetChild(0).localPosition.x, size2, 0);
 
-        this.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(100, size2);
-        this.transform.GetChild(1).GetComponent<BoxCollider2D>().size = new Vector2(100, size2);
-        this.transform.GetChild(1).GetComponent<BoxCollider2D>().offset = new Vector2(0, size2 / 2);
+        this.transform.GetChild(1).localPosition = new Vector3(this.transform.GetChild(1).localPosition.x, size1, 0);
     }
 
     // Update is called once per frame
@@ -38,6 +37,11 @@ public class Obstacle : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name == "Toast")
+        {
             player.GetComponent<BirdControl>().score += 1;
+            source.Play();
+        }
+            
     }
+
 }

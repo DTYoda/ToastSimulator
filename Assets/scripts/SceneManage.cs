@@ -86,14 +86,6 @@ public class SceneManage : MonoBehaviour
             {
                 flappyBirdQuest = false;
                 flappyBirdRequired = 0;
-                if (completeFlappyBird)
-                {
-                    manager.CompleteQuestSound();
-                }
-                else
-                {
-
-                }
             }
         }
         GameObject.Find("MainMenu").GetComponent<MainMenuScript>().StartGameNoAnim(playerLocation);

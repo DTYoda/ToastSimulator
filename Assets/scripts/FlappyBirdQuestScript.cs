@@ -61,7 +61,7 @@ public class FlappyBirdQuestScript : MonoBehaviour
 
         if(PlayerPrefs.GetString("quests").Contains("Missing Child"))
         {
-            this.transform.localPosition = new Vector3(28.191f, -0.33f, -48.914f);
+            this.transform.localPosition = new Vector3(17.631f, -0.259f, -65.441f);
             script.dialog = newDialouge;
         }
     }
