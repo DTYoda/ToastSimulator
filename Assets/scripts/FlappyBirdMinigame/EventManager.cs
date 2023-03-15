@@ -18,11 +18,26 @@ public class EventManager : MonoBehaviour
     int required;
     void Start()
     {
-        GameObject.Find("Main Camera").GetComponent<AudioSource>().volume = PlayerPrefs.GetInt("volume") / 100.0f;
+        if (PlayerPrefs.GetInt("musicToggle") == 0)
+        {
+            GameObject.Find("Main Camera").GetComponent<AudioSource>().volume = 0;
+        }
+        else
+        {
+            GameObject.Find("Main Camera").GetComponent<AudioSource>().volume = PlayerPrefs.GetInt("volume") / 100.0f;
+        }
+        
 
         sceneManger = GameObject.Find("SCENEMANAGER");
-        source.volume = PlayerPrefs.GetInt("volume") / 100.0f;
-        if(sceneManger != null)
+        if (PlayerPrefs.GetInt("effectsToggle") == 0)
+        {
+            source.volume = 0;
+        }
+        else
+        {
+            source.volume = PlayerPrefs.GetInt("volume") / 100.0f;
+        }
+        if (sceneManger != null)
         {
             quest = sceneManger.GetComponent<SceneManage>().flappyBirdQuest;
             required = sceneManger.GetComponent<SceneManage>().flappyBirdRequired;

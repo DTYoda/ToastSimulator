@@ -22,12 +22,25 @@ public class TutorialScript : MonoBehaviour
             player.GetComponent<QuestManager>().currentQuest = "Tutorial";
             player.GetComponent<QuestManager>().acceptedQuest = 0;
             player.GetComponent<QuestManager>().questXP = 5;
+            player.GetComponent<QuestManager>().questDesc = "Look here to see more information about tasks you do!";
             StartCoroutine("tutorial");
         }
     }
 
     IEnumerator tutorial()
     {
+        if(PlayerPrefs.GetInt("volume") == 0)
+        {
+            PlayerPrefs.SetInt("volume", 50);
+        }
+        if (PlayerPrefs.GetInt("sens") == 0)
+        {
+            PlayerPrefs.SetInt("sens", 50);
+        }
+
+        PlayerPrefs.SetInt("musicToggle", 1);
+        PlayerPrefs.SetInt("musicToggle", 1);
+
         tutorialText.gameObject.SetActive(true);
         tutorialBox.SetActive(true);
         yield return new WaitForSeconds(0.3f);

@@ -12,7 +12,14 @@ public class Obstacle : MonoBehaviour
     GameObject player;
     void Start()
     {
-        source.volume = PlayerPrefs.GetInt("volume") / 100.0f;
+        if (PlayerPrefs.GetInt("effectsToggle") == 0)
+        {
+            source.volume = 0;
+        }
+        else
+        {
+            source.volume = PlayerPrefs.GetInt("volume") / 100.0f;
+        }
         player = GameObject.Find("Toast");
 
         gap = Random.Range(300, 500);

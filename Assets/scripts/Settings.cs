@@ -13,12 +13,16 @@ public class Settings : MonoBehaviour
     public Text volumeText;
     public Text sensitivityText;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         if (PlayerPrefs.GetInt("sens") == 0)
         {
             PlayerPrefs.SetInt("sens", 50);
         }
+
+    }
+    void Start()
+    {
 
         volumeSlider.value = PlayerPrefs.GetInt("volume");
         sensitivitySlider.value = PlayerPrefs.GetInt("sens");
@@ -30,6 +34,15 @@ public class Settings : MonoBehaviour
         else
         {
             musicToggle.isOn = true;
+        }
+
+        if (PlayerPrefs.GetInt("effectsToggle") == 0)
+        {
+            effectsToggle.isOn = false;
+        }
+        else
+        {
+            effectsToggle.isOn = true;
         }
     }
 
@@ -54,6 +67,18 @@ public class Settings : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("musicToggle", 0);
+        }
+    }
+
+    public void EffectsToggleChange()
+    {
+        if (effectsToggle.isOn == true)
+        {
+            PlayerPrefs.SetInt("effectsToggle", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("effectsToggle", 0);
         }
     }
 }

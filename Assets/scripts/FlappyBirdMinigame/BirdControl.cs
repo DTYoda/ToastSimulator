@@ -18,7 +18,14 @@ public class BirdControl : MonoBehaviour
     public int score;
     void Start()
     {
-        source.volume = PlayerPrefs.GetInt("volume") / 100.0f;
+        if (PlayerPrefs.GetInt("effectsToggle") == 0)
+        {
+            source.volume = 0;
+        }
+        else
+        {
+            source.volume = PlayerPrefs.GetInt("volume") / 100.0f;
+        }
         rb = this.GetComponent<Rigidbody2D>();
     }
 
