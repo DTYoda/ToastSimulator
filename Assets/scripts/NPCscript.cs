@@ -209,6 +209,7 @@ public class NPCscript : MonoBehaviour
         if(acceptedQuest && manager.currentQuest != questName && completeQuest == false)
         {
             completeQuest = true;
+            //adds the quest to PlayerPrefs, allowing for saved progress
             PlayerPrefs.SetString("quests", PlayerPrefs.GetString("quests") + " " + questName);
         }
     }

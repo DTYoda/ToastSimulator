@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    private float speed;
-    private float originalSpeed = 3;
-    private float jumpSpeed = 2;
-    private float sprintSpeed = 6;
+    public float speed;
+    private float originalSpeed = 4;
+    private float sprintSpeed = 7;
     private bool isSprinting = false;
 
     public float jumpHeight;
@@ -16,11 +15,11 @@ public class Movement : MonoBehaviour
     public GameObject player;
     public Camera mainCamera;
 
-    private Vector3 direction;
+    public Vector3 direction;
 
     public GameObject groundCheck;
     private float checkRadius = 0.01f;
-    private bool isGrounded;
+    public bool isGrounded;
 
     public LayerMask mask;
 
@@ -54,20 +53,13 @@ public class Movement : MonoBehaviour
 
         isGrounded = Physics.CheckSphere(groundCheck.transform.position, checkRadius, mask);
 
-        if (isSprinting && isGrounded)
+        if (isSprinting)
         {
             speed = sprintSpeed;
         }
         else
         {
-            if(!isGrounded)
-            {
-                speed = jumpSpeed;
-            }
-            else
-            {
-                speed = originalSpeed;
-            }
+            speed = originalSpeed;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))

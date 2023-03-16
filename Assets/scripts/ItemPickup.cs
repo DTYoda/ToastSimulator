@@ -30,8 +30,6 @@ public class ItemPickup : MonoBehaviour
         //gets where the camera is looking
         cameraLookPosition = mainCamera.transform.position + (castDistance - 1) * mainCamera.transform.forward;
 
-        //checks if you are looking at or holding an object
-
         //reset holding and looking variables if the object you are holding has been deleted
         if (previousHit == null)
         {
@@ -61,8 +59,10 @@ public class ItemPickup : MonoBehaviour
             isHolding = false;
         }
 
+        //If uoi are looking at a valid object
         if (hit.transform != null && isLooking && hit.transform.gameObject.layer == 6)
         {
+            //Turn on the text and set its value
             interactText.gameObject.SetActive(true);
             if (!isHolding)
             {
@@ -100,17 +100,21 @@ public class ItemPickup : MonoBehaviour
             interactText.gameObject.SetActive(false);
         }
 
+        //if you are holding a valid object
         if (isHolding && previousHit != null)
         {
             if (previousHit.layer == 6)
             {
                 interactText.gameObject.SetActive(false);
             }
-            previousHit.GetComponent<Rigidbody>().useGravity = false;
-            previousHit.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            previousHit.GetComponent<Rigidbody>().freezeRotation = true;
+            Rigidbody rb = previousHit.GetComponent<Rigidbody>();
+            //changes values about the object to prevent bugs and assist its movement
+            rb.useGravity = false;
+            rb.velocity = new Vector3(0, 0, 0);
+            rb.freezeRotation = true;
             previousHit.layer = 8;
-            previousHit.GetComponent<Rigidbody>().MovePosition(previousHit.transform.position + (cameraLookPosition - previousHit.transform.position) * Time.fixedDeltaTime * itemSpeed);
+            //changes the location of the object to the player cursor
+            rb.MovePosition(previousHit.transform.position + (cameraLookPosition - previousHit.transform.position) * Time.fixedDeltaTime * itemSpeed);
 
             previousHit.transform.eulerAngles = new Vector3(previousHit.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, previousHit.transform.eulerAngles.z);
 
@@ -120,24 +124,24 @@ public class ItemPickup : MonoBehaviour
     public LayerMask mask2;
     private void FixedUpdate()
     {
-        if (!isHolding && previousHit != null)
+        //if you just dropped an object
+        if (!isHolding && previousHit != null && previousHit.gameObject.layer == 8)
         {
-            if (previousHit.gameObject.layer == 8)
+            //release a new raycast to see if the dropped object can still be seen
+            RaycastHit hit1;
+            Physics.Raycast(mainCamera.transform.position, (previousHit.transform.position - mainCamera.transform.position).normalized, out hit1, castDistance, mask2);
+            
+            if (hit1.transform != null)
             {
-                RaycastHit hit1;
-                Physics.Raycast(mainCamera.transform.position, (previousHit.transform.position - mainCamera.transform.position).normalized, out hit1, castDistance, mask2);
-
-                if (hit1.transform != null)
+                //if you cannot still see the object, assume it is out of bounds and reset the objects position
+                if (hit1.transform.gameObject != previousHit)
                 {
-                    if (hit1.transform.gameObject != previousHit)
-                    {
-                        previousHit.transform.position = mainCamera.transform.position;
-                    }
+                    previousHit.transform.position = mainCamera.transform.position;
                 }
-                previousHit.GetComponent<Rigidbody>().useGravity = true;
-                previousHit.GetComponent<Rigidbody>().freezeRotation = false;
-                previousHit.layer = 6;
             }
+            previousHit.GetComponent<Rigidbody>().useGravity = true;
+            previousHit.GetComponent<Rigidbody>().freezeRotation = false;
+            previousHit.layer = 6;
         }
     }
 }
