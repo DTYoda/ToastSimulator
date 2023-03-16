@@ -134,6 +134,14 @@ public class NPCscript : MonoBehaviour
             {
                 StartCoroutine("speakTimed");
             }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    StopAllCoroutines();
+                    canSpeak = true;
+                }
+            }
             questAcceptObject.SetActive(true);
             acceptedQuestTexts[0].text = "Accept Quest: " + questName + "?";
             acceptedQuestTexts[1].text = questDescription;
@@ -174,6 +182,14 @@ public class NPCscript : MonoBehaviour
             if (canSpeak)
             {
                 StartCoroutine("speakTimed");
+            }
+            else
+            {
+                if(Input.GetKeyDown(KeyCode.F))
+                {
+                    StopAllCoroutines();
+                    canSpeak = true;
+                }
             }
         }
     }
@@ -225,10 +241,7 @@ public class NPCscript : MonoBehaviour
             for (int i = 0; i < dialog[speakText].Length; i++)
             {
                 text.text += dialog[speakText][i];
-                if(speakText == 0)
-                    yield return new WaitForSecondsRealtime(0.05f);
-                else
-                    yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSecondsRealtime(0.03f);
             }
         }
         canSpeak = true;
