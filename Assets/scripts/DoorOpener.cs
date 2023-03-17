@@ -8,6 +8,7 @@ public class DoorOpener : MonoBehaviour
     private float rotateSpeed = 150;
 
     public bool reverse;
+    public bool isLocked;
 
     public Camera mainCam;
     private void Update()

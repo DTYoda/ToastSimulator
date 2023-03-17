@@ -13,6 +13,20 @@ public class MainMenuScript : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 0;
+        if(PlayerPrefs.GetInt("completeTutorial") == 0)
+        {
+            if (PlayerPrefs.GetInt("volume") == 0)
+            {
+                PlayerPrefs.SetInt("volume", 50);
+            }
+            if (PlayerPrefs.GetInt("sens") == 0)
+            {
+                PlayerPrefs.SetInt("sens", 50);
+            }
+
+            PlayerPrefs.SetInt("musicToggle", 1);
+            PlayerPrefs.SetInt("effectsToggle", 1);
+        }
     }
 
     private void Start()

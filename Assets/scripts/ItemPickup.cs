@@ -16,6 +16,8 @@ public class ItemPickup : MonoBehaviour
     public float itemSpeed = 30;
 
     public float castDistance;
+
+    public RaycastHit hitDoor;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +75,7 @@ public class ItemPickup : MonoBehaviour
 
 
         //checks if you are looking at or opening a door
-        RaycastHit hitDoor;
+        
         Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hitDoor, castDistance, doorMask);
         if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, castDistance, doorMask) && hitDoor.transform.gameObject.CompareTag("door"))
         {
@@ -81,16 +83,34 @@ public class ItemPickup : MonoBehaviour
             interactText.gameObject.SetActive(true);
             if (doorOpen.isOpen)
             {
-                interactText.text = "Press F to Close Door";
+                if(doorOpen.isLocked && !PlayerPrefs.GetString("boughtItems").Contains("Lock Pick"))
+                {
+                    interactText.text = "Lock pick required!";
+                }
+                else
+                {
+                    interactText.text = "Press F to Close Door";
+                }
+                 
             }
             else
             {
-                interactText.text = "Press F to open Door";
+                if (doorOpen.isLocked && !PlayerPrefs.GetString("boughtItems").Contains("Lock Pick"))
+                {
+                    interactText.text = "Lock pick required!";
+                }
+                else
+                {
+                    interactText.text = "Press F to Open Door";
+                }
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
-                doorOpen.isOpen = !doorOpen.isOpen;
-                interactText.gameObject.SetActive(false);
+                if((doorOpen.isLocked && PlayerPrefs.GetString("boughtItems").Contains("Lock Pick")) || !doorOpen.isLocked)
+                {
+                    doorOpen.isOpen = !doorOpen.isOpen;
+                    interactText.gameObject.SetActive(false);
+                }
             }
         }
 
