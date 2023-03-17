@@ -28,14 +28,6 @@ public class SceneManage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.N))
-        {
-            FlappyBird(false, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            Return();
-        }
     }
 
     public void FlappyBird(bool i, int r)

@@ -148,23 +148,4 @@ public class TutorialScript : MonoBehaviour
         }
         return false;
     }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            PlayerPrefs.SetInt("completeTutorial", 0);
-            PlayerPrefs.SetInt("XP", 0);
-            PlayerPrefs.SetInt("lvl", 0);
-            PlayerPrefs.SetInt("requiredXP", 0);
-            
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            PlayerPrefs.SetString("quests", "");
-            PlayerPrefs.SetString("questItems", "");
-            PlayerPrefs.SetString("boughtItems", "");
-        }
-            
-    }
 }
