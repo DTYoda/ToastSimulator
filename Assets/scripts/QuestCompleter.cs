@@ -9,6 +9,7 @@ public class QuestCompleter : MonoBehaviour
     public bool needsItem = false;
     public string itemNeeded = "";
     private GameObject player;
+    public bool hasRadius;
 
     private void Start()
     {
@@ -32,5 +33,21 @@ public class QuestCompleter : MonoBehaviour
             }
         }
         
+    }
+
+    private void Update()
+    {
+        if(player != null && hasRadius)
+        {
+            QuestManager manager = player.GetComponent<QuestManager>();
+            if (manager.hasQuest == true && manager.objectives.Length > manager.currentStep && manager.objectives[manager.currentStep] == questName)
+            {
+                this.transform.GetChild(0).gameObject.SetActive(true);
+            }
+            else
+            {
+                this.transform.GetChild(0).gameObject.SetActive(false);
+            }
+        }
     }
 }

@@ -5,23 +5,28 @@ using UnityEngine.UI;
 
 public class Arcade : MonoBehaviour
 {
-    SceneManage manager;
+    GameObject manager;
+    SceneManage sceneManage;
     public Text interactText;
     bool isInRange;
 
     private void Start()
     {
-        manager = GameObject.Find("SCENEMANAGER").GetComponent<SceneManage>();
+        manager = GameObject.Find("SCENEMANAGER");
+        if(manager != null)
+        {
+            sceneManage = GameObject.Find("SCENEMANAGER").GetComponent<SceneManage>();
+        }
     }
     private void Update()
     {
-        if(isInRange)
+        if(isInRange && sceneManage != null)
         {
             interactText.gameObject.SetActive(true);
             interactText.text = "Press F to play Flappy Toast";
             if(Input.GetKeyDown(KeyCode.F))
             {
-                manager.FlappyBird(false, 0);
+                sceneManage.FlappyBird(false, 0);
             }
         }
     }
