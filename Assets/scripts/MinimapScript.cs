@@ -83,13 +83,13 @@ public class MinimapScript : MonoBehaviour
             this.GetComponent<Camera>().orthographicSize = PlayerPrefs.GetFloat("MinimapSize");
             this.GetComponent<Camera>().targetTexture = minimapTexture;
 
-            if (Input.GetKey(KeyCode.Minus) && PlayerPrefs.GetFloat("MinimapSize") > minSize)
-            {
-                PlayerPrefs.SetFloat("MinimapSize", PlayerPrefs.GetFloat("MinimapSize") + 5 * Time.deltaTime * 2);
-            }
-            if (Input.GetKey(KeyCode.Equals) && PlayerPrefs.GetFloat("MinimapSize") < maxSize)
+            if (Input.GetKey(KeyCode.Equals) && PlayerPrefs.GetFloat("MinimapSize") > minSize)
             {
                 PlayerPrefs.SetFloat("MinimapSize", PlayerPrefs.GetFloat("MinimapSize") - 5 * Time.deltaTime * 2);
+            }
+            if (Input.GetKey(KeyCode.Minus) && PlayerPrefs.GetFloat("MinimapSize") < maxSize)
+            {
+                PlayerPrefs.SetFloat("MinimapSize", PlayerPrefs.GetFloat("MinimapSize") + 5 * Time.deltaTime * 2);
             }
 
             this.transform.position = new Vector3(player.position.x, player.position.y + 20, player.position.z);
