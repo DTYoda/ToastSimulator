@@ -7,6 +7,7 @@ public class HouseLoader : MonoBehaviour
     // Start is called before the first frame update
     GameObject player;
     GameObject houseInsides;
+
     void Start()
     {
         player = GameObject.Find("Player");
