@@ -8,15 +8,21 @@ public class MoleSpawner : MonoBehaviour
 
     public Vector2 topLeft;
     public Vector2 bottomRight;
+
+    public GameObject topLeftObject;
+    public GameObject bottomRightObject;
     void Start()
     {
         InvokeRepeating("SpawnMole", 2f, 2f);
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        topLeft = topLeftObject.transform.position;
+        bottomRight = bottomRightObject.transform.position;
     }
 
     public void SpawnMole()

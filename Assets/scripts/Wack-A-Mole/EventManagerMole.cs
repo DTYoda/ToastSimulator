@@ -17,6 +17,9 @@ public class EventManagerMole : MonoBehaviour
 
     public int score;
 
+    bool hasTimeLimit;
+    int timeLimit;
+
     bool quest;
     int required;
     void Start()
@@ -53,10 +56,7 @@ public class EventManagerMole : MonoBehaviour
         highscoreText.text = "High Score: " + PlayerPrefs.GetInt("MoleScore").ToString();
         scoreText.text = score.ToString();
 
-        if (score > PlayerPrefs.GetInt("MoleScore"))
-        {
-            PlayerPrefs.SetInt("MoleScore", score);
-        }
+        
 
         if(quest && required <= player.GetComponent<BirdControl>().score)
         {
@@ -77,8 +77,11 @@ public class EventManagerMole : MonoBehaviour
             Destroy(game.transform.Find("Obstacles").transform.GetChild(i).gameObject);
         }
 
+        timeLimit = 30;
         game.transform.Find("GameOver").gameObject.SetActive(false);
         Time.timeScale = 1;
+
+        StartCoroutine("Timer");
     }
 
     public void PauseGame()
@@ -113,6 +116,12 @@ public class EventManagerMole : MonoBehaviour
 
     IEnumerator Timer()
     {
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(timeLimit);
+        if (score > PlayerPrefs.GetInt("MoleScore"))
+        {
+            PlayerPrefs.SetInt("MoleScore", score);
+        }
+        PauseGame();
+        score = 0;
     }
 }
