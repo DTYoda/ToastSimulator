@@ -5,28 +5,30 @@ using UnityEngine;
 public class MoleSpawner : MonoBehaviour
 {
     public GameObject moleObject;
+    public EventManagerMole manager;
 
     public Vector2 topLeft;
     public Vector2 bottomRight;
 
     public GameObject topLeftObject;
     public GameObject bottomRightObject;
-    void Start()
+
+    private void Start()
     {
-        InvokeRepeating("SpawnMole", 2f, 2f);
-
-        
+        StartCoroutine("SpawnMole");
     }
-
     // Update is called once per frame
     void Update()
     {
         topLeft = topLeftObject.transform.position;
         bottomRight = bottomRightObject.transform.position;
     }
-
-    public void SpawnMole()
+    IEnumerator SpawnMole()
     {
-        Instantiate(moleObject, new Vector3(Random.Range(topLeft.x, bottomRight.x), Random.Range(bottomRight.y, topLeft.y), 0), moleObject.transform.rotation, this.gameObject.transform);
+        while(manager.timeLimit != 0)
+        {
+            yield return new WaitForSeconds(2 - 1 / manager.timeLimit);
+            Instantiate(moleObject, new Vector3(Random.Range(topLeft.x, bottomRight.x), Random.Range(bottomRight.y, topLeft.y), 0), moleObject.transform.rotation, this.gameObject.transform);
+        }
     }
 }

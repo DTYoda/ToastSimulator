@@ -22,7 +22,8 @@ public class EventManagerMole : MonoBehaviour
     bool isEndlesss = false;
 
     bool hasTimeLimit;
-    int timeLimit;
+    public int timeLimit;
+    int previousTime;
 
     bool quest;
     int required;
@@ -78,6 +79,7 @@ public class EventManagerMole : MonoBehaviour
     {
         game.SetActive(true);
         score = 0;
+        previousTime = time;
         for(int i = 0; i < game.transform.Find("Obstacles").transform.childCount; i++)
         {
             Destroy(game.transform.Find("Obstacles").transform.GetChild(i).gameObject);
@@ -96,6 +98,11 @@ public class EventManagerMole : MonoBehaviour
 
         if(!isEndlesss)
             StartCoroutine("Timer");
+    }
+
+    public void RestartGame()
+    {
+        startGame(previousTime);
     }
 
     public void PauseGame()
