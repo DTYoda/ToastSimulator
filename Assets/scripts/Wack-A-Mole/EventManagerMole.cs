@@ -11,6 +11,8 @@ public class EventManagerMole : MonoBehaviour
     public GameObject sceneManger;
     public GameObject questCompletion;
 
+    public MoleSpawner spawner;
+
     public AudioSource source;
     public AnimationClip clip;
     bool completionSound = false;
@@ -21,9 +23,9 @@ public class EventManagerMole : MonoBehaviour
     public int score;
     bool isEndlesss = false;
 
-    bool hasTimeLimit;
+    public bool hasTimeLimit;
     public int timeLimit;
-    int previousTime;
+    public int previousTime;
 
     bool quest;
     int required;
@@ -77,6 +79,8 @@ public class EventManagerMole : MonoBehaviour
 
     public void startGame(int time)
     {
+        StopAllCoroutines();
+        spawner.StopAllCoroutines();
         game.SetActive(true);
         score = 0;
         previousTime = time;
@@ -96,8 +100,12 @@ public class EventManagerMole : MonoBehaviour
         game.transform.Find("GameOver").gameObject.SetActive(false);
         Time.timeScale = 1;
 
-        if(!isEndlesss)
+        if (!isEndlesss)
             StartCoroutine("Timer");
+        else
+            StartCoroutine("Endless");
+
+        spawner.StartCoroutine("SpawnMole");
     }
 
     public void RestartGame()
@@ -115,8 +123,6 @@ public class EventManagerMole : MonoBehaviour
         {
             Time.timeScale = 1;
         }
-
-        StopAllCoroutines();
     }
 
     public void QuitGame()
@@ -149,8 +155,22 @@ public class EventManagerMole : MonoBehaviour
         {
             PlayerPrefs.SetInt("MoleScore", score);
         }
+        for (int i = 0; i < game.transform.Find("Obstacles").transform.childCount; i++)
+        {
+            Destroy(game.transform.Find("Obstacles").transform.GetChild(i).gameObject);
+        }
         PauseGame();
+        spawner.StopAllCoroutines();
         roundOver.SetActive(true);
         score = 0;
+    }
+
+    IEnumerator Endless()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            timeLimit++;
+        }
     }
 }
