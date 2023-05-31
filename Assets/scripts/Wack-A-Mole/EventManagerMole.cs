@@ -92,9 +92,11 @@ public class EventManagerMole : MonoBehaviour
         if(time == 0)
         {
             isEndlesss = true;
+            timeLimit = 0;
         }
         else
         {
+            isEndlesss = false;
             timeLimit = time;
         }
         game.transform.Find("GameOver").gameObject.SetActive(false);
