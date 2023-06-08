@@ -20,11 +20,11 @@ public class MoleSpawner : MonoBehaviour
     }
     IEnumerator SpawnMole()
     {
-        if(manager.hasTimeLimit)
+        if(!manager.isEndlesss)
         {
             while (manager.timeLimit != 0)
             {
-                yield return new WaitForSeconds(2.0f * -1 *((manager.timeLimit + 3.0f) / manager.previousTime));
+                yield return new WaitForSeconds(2.0f * ((manager.timeLimit + 3.0f) / manager.previousTime));
                 Instantiate(moleObject, new Vector3(Random.Range(topLeft.x, bottomRight.x), Random.Range(bottomRight.y, topLeft.y), 0), moleObject.transform.rotation, this.gameObject.transform);
             }
         }

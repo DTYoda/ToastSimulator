@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7504344499018825560}
   - component: {fileID: 6261085822945281027}
   - component: {fileID: 7981954285449051422}
+  - component: {fileID: 1309624048520731540}
   m_Layer: 5
   m_Name: Mole
   m_TagString: Untagged
@@ -60,15 +61,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3962264, g: 0.1545799, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -7392930446754590701, guid: 5649b8fd2ddee114da9b7f607dc263d9, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -145,3 +146,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61c095712ce4454c89e9ceb0bf9c4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 1309624048520731540}
+  dieClip: {fileID: 7400000, guid: 39698245cd897a14c99ec8cfd8637300, type: 2}
+  hitClip: {fileID: 7400000, guid: 608c73af6823cf64ea7c284be9f32176, type: 2}
+  clicked: 0
+--- !u!95 &1309624048520731540
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763461090619606007}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 35309c4e80194f34abe3eddd46033e2e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

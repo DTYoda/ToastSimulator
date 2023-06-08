@@ -21,9 +21,8 @@ public class EventManagerMole : MonoBehaviour
     public GameObject roundOver;
 
     public int score;
-    bool isEndlesss = false;
+    public bool isEndlesss = false;
 
-    public bool hasTimeLimit;
     public int timeLimit;
     public int previousTime;
 
