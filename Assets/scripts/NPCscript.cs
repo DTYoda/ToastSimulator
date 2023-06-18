@@ -22,6 +22,7 @@ public class NPCscript : MonoBehaviour
     private bool isInside;
     private bool completeQuest = false;
     private bool acceptedQuest = false;
+    private int timesTalkedTo = 0;
 
     public int speakText;
     public Text interactText;
@@ -78,7 +79,11 @@ public class NPCscript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 if(canSpeak)
-                    speakText = Random.Range(1, dialog.Length);
+                {
+                    speakText = timesTalkedTo % dialog.Length;
+                    timesTalkedTo++;
+                }
+                    
                 isSpeaking = true;
             }
         }

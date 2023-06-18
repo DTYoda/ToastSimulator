@@ -7,6 +7,7 @@ public class WhackAMoleQuestScript : MonoBehaviour
     private GameObject player;
     private GameObject sceneManage;
     public string[] newDialouge;
+    private bool uiActive;
     private void Start()
     {
         player = GameObject.Find("Player");
@@ -16,7 +17,7 @@ public class WhackAMoleQuestScript : MonoBehaviour
     {
         QuestManager manager = player.GetComponent<QuestManager>();
         NPCscript script = this.GetComponent<NPCscript>();
-        if (manager.currentQuest == "Whack-A-Mole" && (manager.currentStep == 1 || manager.currentStep == 2))
+        if (manager.currentQuest == "Whack-A-Mole" && (manager.currentStep == 2 || manager.currentStep == 3))
         {
             script.speakText = 0;
             if(manager.currentStep == 1)
@@ -62,6 +63,23 @@ public class WhackAMoleQuestScript : MonoBehaviour
         if(PlayerPrefs.GetString("quests").Contains("Whack-A-Mole"))
         {
             this.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        QuestManager manager = player.GetComponent<QuestManager>();
+        NPCscript script = this.GetComponent<NPCscript>();
+        if (other.CompareTag("Player") && manager.currentQuest == "Whack-A-Mole" && (manager.currentStep == 1 || manager.currentStep == 2))
+        {
+            uiActive = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            uiActive = false;
         }
     }
 }

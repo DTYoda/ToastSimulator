@@ -175,7 +175,7 @@ public class QuestManager : MonoBehaviour
         levelSlider.value = (float) PlayerPrefs.GetInt("XP") / PlayerPrefs.GetInt("requiredXP");
         levelText.text = PlayerPrefs.GetInt("lvl").ToString();
         xpText.text = PlayerPrefs.GetInt("XP") + "/" + PlayerPrefs.GetInt("requiredXP");
-        cashText.text = PlayerPrefs.GetFloat("money").ToString("F2") + "$";
+        cashText.text = "$" + PlayerPrefs.GetFloat("money").ToString("F2");
     }
 
     public void CompleteQuestSound()
