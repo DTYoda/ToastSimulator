@@ -10,8 +10,10 @@ public class EventManagerMole : MonoBehaviour
     public Text scoreText;
     public GameObject sceneManger;
     public GameObject questCompletion;
-
     public MoleSpawner spawner;
+
+    public GameObject endlessbutton;
+    public GameObject minButton;
 
     public AudioSource source;
     public AnimationClip clip;
@@ -51,8 +53,8 @@ public class EventManagerMole : MonoBehaviour
         }
         if (sceneManger != null)
         {
-            quest = sceneManger.GetComponent<SceneManage>().flappyBirdQuest;
-            required = sceneManger.GetComponent<SceneManage>().flappyBirdRequired;
+            quest = sceneManger.GetComponent<SceneManage>().moleQuest;
+            required = sceneManger.GetComponent<SceneManage>().moleRequired;
         }
     }
 
@@ -62,11 +64,17 @@ public class EventManagerMole : MonoBehaviour
         highscoreText.text = "High Score: " + PlayerPrefs.GetInt("MoleScore").ToString();
         scoreText.text = score.ToString();
 
+        if(quest)
+        {
+            endlessbutton.SetActive(false);
+            minButton.SetActive(false);
+        }
+
         
 
-        if(quest && required <= player.GetComponent<BirdControl>().score)
+        if(quest && required <= score)
         {
-            sceneManger.GetComponent<SceneManage>().completeFlappyBird = true;
+            sceneManger.GetComponent<SceneManage>().completeMole = true;
             if(!completionSound)
             {
                 StartCoroutine("QuestCompletion");

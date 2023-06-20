@@ -23,6 +23,7 @@ public class MoleScript : MonoBehaviour
     {
         if(!clicked)
         {
+            anim.SetTrigger("Hit");
             StartCoroutine("MoleClickAnim");
         }
         clicked = true;
@@ -35,15 +36,15 @@ public class MoleScript : MonoBehaviour
         {
             anim.SetTrigger("Die");
             yield return new WaitForSeconds(dieClip.length);
-            Destroy(this.gameObject);
+            if(!clicked)
+                Destroy(this.gameObject);
         }
     }
 
     IEnumerator MoleClickAnim()
     {
-        anim.SetTrigger("Hit");
-        yield return new WaitForSeconds(hitClip.length);
         manager.score++;
+        yield return new WaitForSeconds(hitClip.length);
         Destroy(this.gameObject);
     }
 }

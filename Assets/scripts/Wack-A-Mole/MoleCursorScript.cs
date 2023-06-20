@@ -31,7 +31,7 @@ public class MoleCursorScript : MonoBehaviour
     { 
         anim.enabled = true;
         anim.SetTrigger("Smash");
-        yield return new WaitForSeconds(clip.length);
+        yield return new WaitForSecondsRealtime(clip.length);
         anim.enabled = false;
         hasClicked = false;
     }

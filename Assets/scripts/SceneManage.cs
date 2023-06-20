@@ -10,6 +10,11 @@ public class SceneManage : MonoBehaviour
     public bool completeFlappyBird;
     public int flappyBirdXP;
 
+    public bool moleQuest;
+    public int moleRequired;
+    public bool completeMole;
+    public int moleXP;
+
     public Vector3 playerLocation = Vector3.zero;
     public GameObject player;
 
@@ -47,6 +52,23 @@ public class SceneManage : MonoBehaviour
         SceneManager.LoadScene("FlappyBirdMinigame");
     }
 
+    public void WhackAMole(bool i, int r)
+    {
+        moleQuest = i;
+        moleRequired = r;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 1;
+
+        if (player != null)
+        {
+            playerLocation = player.transform.position;
+        }
+
+        SceneManager.LoadScene("WackAMoleMinigame");
+    }
+
     public void Return()
     {
         returned = true;
@@ -58,10 +80,11 @@ public class SceneManage : MonoBehaviour
                 PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + flappyBirdXP);
                 PlayerPrefs.SetString("quests", PlayerPrefs.GetString("quests") + " Missing Child");
             }
-            else
-            {
-
-            }
+        }
+        else if (moleQuest && completeMole)
+        {
+            PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + moleXP);
+            PlayerPrefs.SetString("quests", PlayerPrefs.GetString("quests") + " Whack-A-Mole");
         }
 
             SceneManager.LoadScene("Level1");

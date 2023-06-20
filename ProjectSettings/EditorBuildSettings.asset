@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FlappyBirdMinigame.unity
     guid: 87f8a270ea7ee95448e0f58da4e6f01f
+  - enabled: 1
+    path: Assets/Scenes/WackAMoleMinigame.unity
+    guid: 7d063182a781a0c4bab3dfd7befe3729
   m_configObjects: {}
