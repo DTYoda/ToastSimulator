@@ -6,7 +6,6 @@ public class EventManagerMole : MonoBehaviour
 {
     public GameObject player;
     public GameObject game;
-    public Text highscoreText;
     public Text scoreText;
     public GameObject sceneManger;
     public GameObject questCompletion;
@@ -61,7 +60,6 @@ public class EventManagerMole : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        highscoreText.text = "High Score: " + PlayerPrefs.GetInt("MoleScore").ToString();
         scoreText.text = score.ToString();
 
         if(quest)
