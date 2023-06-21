@@ -10,6 +10,9 @@ public class Arcade : MonoBehaviour
     public Text interactText;
     bool isInRange;
 
+    public bool flappyToast;
+    public bool whackAMole;
+
     private void Start()
     {
         manager = GameObject.Find("SCENEMANAGER");
@@ -23,10 +26,16 @@ public class Arcade : MonoBehaviour
         if(isInRange && sceneManage != null)
         {
             interactText.gameObject.SetActive(true);
-            interactText.text = "Press F to play Flappy Toast";
-            if(Input.GetKeyDown(KeyCode.F))
+            if(flappyToast)
+                interactText.text = "Press F to play Flappy Toast!";
+            else if(whackAMole)
+                interactText.text = "Press F to play Whack-A-Mole!";
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                sceneManage.FlappyBird(false, 0);
+                if(flappyToast)
+                    sceneManage.FlappyBird(false, 0);
+                if(whackAMole)
+                    sceneManage.FlappyBird(false, 0);
             }
         }
     }

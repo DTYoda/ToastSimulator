@@ -36,7 +36,7 @@ public class WhackAMoleQuestScript : MonoBehaviour
                     manager.acceptedQuest = 0;
                     if (sceneManage != null)
                     {
-                        sceneManage.GetComponent<SceneManage>().WhackAMole(true, 24);
+                        sceneManage.GetComponent<SceneManage>().WhackAMole(true, 20);
                     }
                     else
                     {

@@ -80,7 +80,7 @@ public class NPCscript : MonoBehaviour
             {
                 if(canSpeak)
                 {
-                    speakText = timesTalkedTo % dialog.Length;
+                    speakText = (timesTalkedTo % (dialog.Length - 1)) + 1;
                     timesTalkedTo++;
                 }
                     

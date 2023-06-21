@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
@@ -80,5 +81,11 @@ public class Settings : MonoBehaviour
         {
             PlayerPrefs.SetInt("effectsToggle", 0);
         }
+    }
+
+    public void ResetStats()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -12,8 +12,8 @@ public class EventManagerMole : MonoBehaviour
     public GameObject questCompletion;
     public MoleSpawner spawner;
 
-    public GameObject endlessbutton;
-    public GameObject minButton;
+    public Button endlessbutton;
+    public Button minButton;
 
     public AudioSource source;
     public AnimationClip clip;
@@ -66,8 +66,8 @@ public class EventManagerMole : MonoBehaviour
 
         if(quest)
         {
-            endlessbutton.SetActive(false);
-            minButton.SetActive(false);
+            endlessbutton.enabled = false;
+            minButton.enabled = false;
         }
 
         
