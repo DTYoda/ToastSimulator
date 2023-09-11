@@ -32,6 +32,9 @@ public class NPCscript : MonoBehaviour
 
     private bool isLooking;
 
+    bool randomLook = true;
+    Quaternion rotation;
+
     Vector3 lookPosition;
     void Start()
     {
@@ -53,11 +56,15 @@ public class NPCscript : MonoBehaviour
         //makes the NPC look towards the player if they're in the same room     
         RaycastHit hitPlayer;
         Physics.Raycast(this.transform.position, (player.transform.position - this.transform.position).normalized, out hitPlayer);
-        if(hitPlayer.transform != null && hitPlayer.transform.gameObject.CompareTag("Player"))
+        if(hitPlayer.transform != null && hitPlayer.transform.gameObject.CompareTag("Player") && Vector3.Distance(hitPlayer.transform.position, this.transform.position) < 10)
         {
             lookPosition = new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z);
+            rotation = Quaternion.LookRotation(lookPosition);
         }
-        Quaternion rotation = Quaternion.LookRotation(lookPosition);
+        else if(randomLook)
+        {
+            StartCoroutine("RandomLook");
+        }
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2);
 
         //If the player is speaking with the NPC, call the AskForQuest function
@@ -105,7 +112,9 @@ public class NPCscript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 7)
+        RaycastHit hitPlayer;
+        Physics.Raycast(this.transform.position, (player.transform.position - this.transform.position).normalized, out hitPlayer);
+        if (other.gameObject.layer == 7 && hitPlayer.transform != null && hitPlayer.transform.gameObject.CompareTag("Player"))
         {
             isSpeaking = false;
             isInside = true;
@@ -147,14 +156,19 @@ public class NPCscript : MonoBehaviour
                     canSpeak = true;
                 }
             }
+            //pull up UI to ask for quest
             questAcceptObject.SetActive(true);
-            acceptedQuestTexts[0].text = "Accept Quest: " + questName + "?";
+            acceptedQuestTexts[0].text = "Accept quest: " + questName + "?";
             acceptedQuestTexts[1].text = questDescription;
+            //give player access to cursor and stop game speed
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0;
+
+            //if quest was accepted
             if (manager.acceptedQuest == 1)
             {
+                //set all needed variables inside quest manager object
                 manager.hasQuest = true;
                 manager.currentStep = 0;
                 manager.objectives = questObjectives;
@@ -169,6 +183,7 @@ public class NPCscript : MonoBehaviour
                 Cursor.visible = false;
                 Time.timeScale = 1;
             }
+            //if quest was declined
             else if (manager.acceptedQuest == -1)
             {
                 isSpeaking = false;
@@ -182,6 +197,7 @@ public class NPCscript : MonoBehaviour
 
 
         }
+        //if NPC doesn't have quest, start normal speech;
         else
         {
             if (canSpeak)
@@ -201,6 +217,8 @@ public class NPCscript : MonoBehaviour
 
     public GameObject questIcon;
     bool i = false;
+
+    //move blue quest icon up and down
     private void QuestIcon()
     {
 
@@ -224,6 +242,7 @@ public class NPCscript : MonoBehaviour
 
     }
 
+    //check if the NPC's quest has been completed
     private void checkForCompletion()
     {
         QuestManager manager = player.GetComponent<QuestManager>();
@@ -235,6 +254,7 @@ public class NPCscript : MonoBehaviour
         }
     }
 
+    //text "typing" animation
     IEnumerator speakTimed()
     {
         canSpeak = false;
@@ -250,5 +270,14 @@ public class NPCscript : MonoBehaviour
             }
         }
         canSpeak = true;
+    }
+
+    //randomly look around if the player is not nearby
+    IEnumerator RandomLook()
+    {
+        randomLook = false;
+        rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+        yield return new WaitForSeconds(Random.Range(2, 5));
+        randomLook = true;
     }
 }

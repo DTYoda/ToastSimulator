@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    float speed = 120;
+    public float speed = 120;
     float gap;
 
     public AudioSource source;
@@ -22,7 +22,8 @@ public class Obstacle : MonoBehaviour
         }
         player = GameObject.Find("Toast");
 
-        gap = Random.Range(300, 400);
+        gap = Random.Range(400 - 3 * player.GetComponent<BirdControl>().score, 500 - 3 * player.GetComponent<BirdControl>().score);
+        speed += 3 * player.GetComponent<BirdControl>().score;
         float size1 = Random.Range(gap, 1060);
         float size2 = -(1060-size1-50) - gap;
         this.transform.GetChild(0).localPosition = new Vector3(this.transform.GetChild(0).localPosition.x, size2, 0);

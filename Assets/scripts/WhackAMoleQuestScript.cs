@@ -26,7 +26,7 @@ public class WhackAMoleQuestScript : MonoBehaviour
             {
                 script.questAcceptObject.SetActive(true);
                 script.acceptedQuestTexts[0].text = "Whack the moles in Buff Jack's yard?";
-                script.acceptedQuestTexts[1].text = "You will have to Whack 24 Moles in 30 seconds.";
+                script.acceptedQuestTexts[1].text = "You will have to Whack 20 Moles in 30 seconds.";
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 Time.timeScale = 0;

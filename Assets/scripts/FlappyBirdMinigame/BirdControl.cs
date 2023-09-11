@@ -7,7 +7,7 @@ public class BirdControl : MonoBehaviour
 {
     Rigidbody2D rb;
     Vector2 velocity;
-    float jump = 220;
+    float jump = 280;
     public Text scoreText;
 
     public AudioClip[] sounds;

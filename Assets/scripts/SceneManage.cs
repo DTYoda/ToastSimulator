@@ -77,13 +77,15 @@ public class SceneManage : MonoBehaviour
         {
             if (completeFlappyBird)
             {
-                PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + flappyBirdXP);
+                PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + 10);
+                PlayerPrefs.SetFloat("money", PlayerPrefs.GetFloat("money") + 5);
                 PlayerPrefs.SetString("quests", PlayerPrefs.GetString("quests") + " Missing Child");
             }
         }
         else if (moleQuest && completeMole)
         {
-            PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + moleXP);
+            PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + 10);
+            PlayerPrefs.SetFloat("money", PlayerPrefs.GetFloat("money") + 5);
             PlayerPrefs.SetString("quests", PlayerPrefs.GetString("quests") + " Whack-A-Mole");
         }
 

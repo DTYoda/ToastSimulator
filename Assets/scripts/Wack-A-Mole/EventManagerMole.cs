@@ -26,6 +26,7 @@ public class EventManagerMole : MonoBehaviour
 
     public int timeLimit;
     public int previousTime;
+    public Text finalScoreText;
 
     bool quest;
     int required;
@@ -66,6 +67,10 @@ public class EventManagerMole : MonoBehaviour
         {
             endlessbutton.enabled = false;
             minButton.enabled = false;
+
+            endlessbutton.GetComponent<Image>().color = Color.gray;
+            minButton.GetComponent<Image>().color = Color.gray;
+
         }
 
         
@@ -105,6 +110,7 @@ public class EventManagerMole : MonoBehaviour
             timeLimit = time;
         }
         game.transform.Find("GameOver").gameObject.SetActive(false);
+        
         Time.timeScale = 1;
 
         if (!isEndlesss)
@@ -169,6 +175,7 @@ public class EventManagerMole : MonoBehaviour
         PauseGame();
         spawner.StopAllCoroutines();
         roundOver.SetActive(true);
+        finalScoreText.text = "Final Score: " + score;
         score = 0;
     }
 

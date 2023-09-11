@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 112358260495894065}
   - component: {fileID: 497237620525501151}
   - component: {fileID: 4934879422754038208}
-  - component: {fileID: 7539106305860473348}
   m_Layer: 2
   m_Name: AgentNPC
   m_TagString: NPC
@@ -73,11 +72,14 @@ MonoBehaviour:
   - Mind your own business, kid. You don't know what you're dealing with
   questObjectives: []
   questXP: 0
+  questCash: 0
   hasQuest: 0
   npcName: REDACTED
   questName: 
   questDescription: 
   body: {fileID: 112358260495894065}
+  isSpeaking: 0
+  speakText: 0
   interactText: {fileID: 0}
   speechText: {fileID: 0}
   acceptedQuestTexts:
@@ -98,21 +100,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0833206, y: 1.9549198, z: 3.3034616}
   m_Center: {x: -0.07692695, y: 0.15662551, z: 0.14834166}
---- !u!114 &7539106305860473348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934357620197105959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11c555596b54184cba3a906018aafa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questName: Return Keys
-  needsItem: 1
-  itemNeeded: Keys
 --- !u!1 &7013500542819165662
 GameObject:
   m_ObjectHideFlags: 0

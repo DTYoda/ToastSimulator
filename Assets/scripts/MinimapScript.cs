@@ -92,7 +92,7 @@ public class MinimapScript : MonoBehaviour
                 PlayerPrefs.SetFloat("MinimapSize", PlayerPrefs.GetFloat("MinimapSize") + 5 * Time.deltaTime * 2);
             }
 
-            this.transform.position = new Vector3(player.position.x, player.position.y + 20, player.position.z);
+            this.transform.position = new Vector3(player.position.x, 22.604902f, player.position.z);
         }
         
     }

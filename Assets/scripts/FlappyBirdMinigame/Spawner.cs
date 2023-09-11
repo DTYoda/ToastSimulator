@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     public GameObject obstacle;
     void Start()
     {
-        InvokeRepeating("Spawn", 1, 5);
+        InvokeRepeating("Spawn", 1, 3);
     }
 
     // Update is called once per frame

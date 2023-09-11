@@ -35,7 +35,7 @@ public class Arcade : MonoBehaviour
                 if(flappyToast)
                     sceneManage.FlappyBird(false, 0);
                 if(whackAMole)
-                    sceneManage.FlappyBird(false, 0);
+                    sceneManage.WhackAMole(false, 0);
             }
         }
     }

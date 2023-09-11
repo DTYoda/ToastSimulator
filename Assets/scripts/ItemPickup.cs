@@ -61,7 +61,7 @@ public class ItemPickup : MonoBehaviour
             isHolding = false;
         }
 
-        //If uoi are looking at a valid object
+        //If you are looking at a valid object
         if (hit.transform != null && isLooking && hit.transform.gameObject.layer == 6)
         {
             //Turn on the text and set its value

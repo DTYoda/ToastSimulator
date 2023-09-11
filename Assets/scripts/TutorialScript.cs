@@ -58,14 +58,14 @@ public class TutorialScript : MonoBehaviour
         tutorialText.text = "First, let's go to the kitchen to see if there's anymore bread left in the house. use WASD to move, F to open doors, and SHIFT to sprint.";
         Time.timeScale = 1;
         yield return new WaitUntil(questStep1);
-        tutorialText.text = "Great! By the way you can press q to see more details about your current quest. The menu will show you all of the quest's tasks, and the bottom of the menu will remind you of the description of the quest!  (Click to continue)";
+        tutorialText.text = "Great! By the way you can press q to see more details about your current quest. The menu will show you all of the quest's tasks! (Click to continue)";
         yield return new WaitForSecondsRealtime(0.4f);
         yield return new WaitUntil(Clicked);
         tutorialText.text = " Look! There's still some bread left! Try picking it up by clicking the mouse.";
         yield return new WaitUntil(questStep2);
         tutorialText.text = "Nice! Now bring it over to the toaster and press F while holding the bread and looking at the toaster to toast it.";
         yield return new WaitUntil(questStep3);
-        tutorialText.text = "Good going, lastly, we need to bring the finished toast to your grandmother, she's really suffering out here with so little bread.";
+        tutorialText.text = "Good going, lastly, we need to bring the finished toast to your grandmother, she's really suffering out here with so little bread. You can tell where NPCs are through your minimap!";
         yield return new WaitUntil(questStep4);
         tutorialText.text = "Amazing work. Sadly, there isn't anymore bread, but that's where you come in. The first step to your journey is going outside and touching grass";
         yield return new WaitUntil(questStep5);
@@ -76,7 +76,7 @@ public class TutorialScript : MonoBehaviour
         tutorialText.text = "Adventure around the town and talk to some of the locals, they may have some work you can do, and more importantly, they may know something about the bread shortage.  (Click to continue)";
         yield return new WaitForSeconds(0.4f);
         yield return new WaitUntil(Clicked);
-        tutorialText.text = "In case you haven't noticed, you have a map! Use the  - and = keys to change its zoom and press M to fullscreen it!  (Click to continue)";
+        tutorialText.text = "In case you haven't noticed, you have a map! Use the  - and = keys to change its zoom of the minimap and press M to fullscreen it! The map will show you where to go for a quest! (Click to continue)";
         yield return new WaitForSeconds(0.4f);
         yield return new WaitUntil(Clicked);
         tutorialText.text = "You can press Escape to open the pause menu. This will allow you to check controls if you ever forget them!  (Click to continue)";
